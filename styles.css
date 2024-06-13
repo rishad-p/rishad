@@ -1,0 +1,8 @@
+body{
+    transition:300ms;
+    margin:0px;
+    user-select:none;
+    touch-action:manipulation;
+    overflow-X:hidden;
+    font-family:sans-serif;
+}

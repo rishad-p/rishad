@@ -8,11 +8,10 @@ body{
 }
 #interactive{
     width: 100vw;
-    height: 50vh;
 }
 #interactive > video {
     width: 100vw;
-    height: 50vh;
+    height: 30vh;
 }
 
 #interactive > canvas {

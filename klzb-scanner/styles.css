@@ -3,30 +3,86 @@ body{
     margin:0px;
     /*user-select:none;*/
     touch-action:manipulation;
-    /*overflow-X:hidden;*/
+    overflow-X:hidden;
     font-family:sans-serif;
+}
+#bar{
+    position: fixed;
+    height: 5vh;
+    width: 90vw;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: yellow;
+    background: #80808040;
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    margin: 5vw;
 }
 #interactive{
     position: fixed;
     width: 100vw;
-    height: 30vh;
+    /*height: 30vh;*/
     overflow: hidden;
 }
 #interactive > video {
     background: gray;
     width: 100vw;
     /*height: 30vh;*/
+    border-radius: 0px 0px 50px 50px;
 }
 
 #interactive > canvas {
     display: none;
-/*    position: absolute;
-    width: 100vw;
-    height: 50vh;
-    left: 0px;*/
 }
 
+#torch-btn{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    z-index: 1;
+    background: #80808080;
+    backdrop-filter: blur(5px);
+    border-radius: 25px 0px 0px 0px;
+    right: 0px;
+    bottom: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 500ms;
+    cursor: pointer;
+}
+.material-icons{
+    transition: 500ms;
+}
+#count{
+    min-width: 50px;
+    height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px;
+    position: fixed;
+    z-index: 1;
+    background: #80808080;
+    backdrop-filter: blur(5px);
+    border-radius: 25px;
+    top: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 500ms;
+}
 #result_strip{
     position: fixed;
+    width: 100vw;
+    height: 50vh;
+    overflow: scroll;
     top: 30vh;
+    text-align: center;
+    background: #80808080;
+    backdrop-filter: blur(5px);
+    color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }

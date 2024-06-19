@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Flashlight Control</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  button {
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <button id="toggleButton" data="off" onclick="torch(this)">Turn On Flashlight</button>
+
+  <script>
+    // Function to handle flashlight control
+    // function toggleFlashlight() {
+    //   if ('torch' in navigator) {
+    //     navigator.torch.toggle().then(function() {
+    //       console.log('Torch is now ' + (navigator.torch.active ? 'on' : 'off'));
+    //     }).catch(function(err) {
+    //       console.error('Failed to toggle torch:', err);
+    //     });
+    //   } else {
+    //     console.error('Torch API not supported');
+    //   }
+    // }
+
+    // Event listener for the button click
+    function torch(e){
+        if ($(e).attr("data") === "off") {
+            $(e).attr("data","on");
+            $(e).html("|");
+            flashon();
+        }
+        else if ($(e).attr("data") === "on") {
+            $(e).attr("data","off");
+            $(e).html("O");
+            flashoff();
+        }
+    }
+
+
+  function flashon(){
+    const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
+    if (SUPPORTS_MEDIA_DEVICES) {
+      navigator.mediaDevices.enumerateDevices().then(devices => {
+        const cameras = devices.filter((device) => device.kind === 'videoinput');
+        if (cameras.length === 0) {
+          throw 'No camera found on this device.';
+        }
+        const camera = cameras[cameras.length - 1];
+        navigator.mediaDevices.getUserMedia({
+          video: {
+            deviceId: camera.deviceId,
+            facingMode: ['user', 'environment'],
+            height: {ideal: 1080},
+            width: {ideal: 1920}
+          }
+        }).then(stream => {
+          const track = stream.getVideoTracks()[0];
+          const imageCapture = new ImageCapture(track)
+          const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
+              track.applyConstraints({
+                advanced: [{torch: true}]
+              });
+          });
+        });
+      });
+    }
+  }
+  function flashoff(){
+      const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
+      if (SUPPORTS_MEDIA_DEVICES) {
+        navigator.mediaDevices.enumerateDevices().then(devices => {
+          const cameras = devices.filter((device) => device.kind === 'videoinput');
+          if (cameras.length === 0) {
+            throw 'No camera found on this device.';
+          }
+          const camera = cameras[cameras.length - 1];
+          navigator.mediaDevices.getUserMedia({
+            video: {
+              deviceId: camera.deviceId,
+              facingMode: ['user', 'environment'],
+              height: {ideal: 1080},
+              width: {ideal: 1920}
+            }
+          }).then(stream => {
+            const track = stream.getVideoTracks()[0];
+            const imageCapture = new ImageCapture(track)
+            const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
+                track.applyConstraints({
+                  advanced: [{torch: false}]
+                });
+            });
+          });
+        });
+      }
+  }
+  </script>
+</body>
+</html>

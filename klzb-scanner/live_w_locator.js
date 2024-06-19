@@ -280,18 +280,33 @@ $(function() {
             }
         }
     });
-
+var datas=[];
+var count = 0;
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
-        if (App.lastResult !== code) {
-            App.lastResult = code;
-            var $node = null
-            const audio = document.getElementById('audio');
-            audio.play();
-            $node = $('<li><div class="thumbnail"><div class="caption"><h4 class="code"></h4></div></div></li>');
-            $node.find("h4.code").html(code);
-            $("#result_strip ul.thumbnails").prepend($node);
-        }
+        // if (App.lastResult !== code) {
+            if (!isNaN(code) == true) {
+                if (code.length === 12) {
+                    App.lastResult = code;
+                    datas.push(code);
+                    count = count + 1;
+                    var $node = null
+                    const audio = document.getElementById('audio');
+                    audio.play();
+                    $("#result_strip").prepend(code+"<br/>");
+                    $("#count").html(count);
+                    $("#bar").html("last_scanned: "+code);
+                    console.log(datas);
+                }
+                else{
+                    $("#bar").html(code + ": is not have 12 length");
+                }
+            }
+            else{
+                $("#bar").html(code + "= not a TID");
+            }
+
+        // }
     });
 
 });

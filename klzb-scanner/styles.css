@@ -7,11 +7,15 @@ body{
     font-family:sans-serif;
 }
 #interactive{
-    width: 100vw;
-}
-#interactive > video {
+    position: fixed;
     width: 100vw;
     height: 30vh;
+    overflow: hidden;
+}
+#interactive > video {
+    background: gray;
+    width: 100vw;
+    /*height: 30vh;*/
 }
 
 #interactive > canvas {
@@ -20,4 +24,9 @@ body{
     width: 100vw;
     height: 50vh;
     left: 0px;*/
+}
+
+#result_strip{
+    position: fixed;
+    top: 30vh;
 }

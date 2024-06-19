@@ -1,22 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <title>KLZB-scanner</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <!-- <link rel="stylesheet" type="text/css" href="styles2.css" /> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  </head>
-  <body>
-      <div id="interactive" class="viewport">
-        
-      </div>
-      <div id="result_strip">
+</head>
+<body>
+    <div id="interactive" class="viewport">
+        <div data="off" onclick="torch(this)" style="
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            z-index: 1;
+            background: gray;
+            right: 0px;
+            bottom: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        ">O</div>
+    </div>
+    <div id="result_strip">
         <ul class="thumbnails"></ul>
-      </div>
-    <audio id="audio" src="scan.mp3"></audio>
-    <script src="quagga.min.js" type="text/javascript"></script>
-    <script src="live_w_locator.js" type="text/javascript"></script>
-  </body>
+    </div>
+<audio id="audio" src="scan.mp3"></audio>
+<script type="text/javascript">
+    function torch(e){
+        if ($(e).attr("data") === "off") {
+            $(e).attr("data","on");
+            flashon();
+        }
+        else if ($(e).attr("data") === "on") {
+            $(e).attr("data","off");
+            flashoff();
+        }
+    }
+function menu_toggle(){
+    if ($("#menu-btn").attr("class") === "menu")
+    {
+        $("#menu-btn").attr("class","close");
+
+        $("#menu-page").css("top","5vh");
+        $("#menu-page").css("left","-5vw");
+        setTimeout(function(){
+            $("#menu-page > text").css("color","black");
+            $("#menu-page").css("top","0vh");
+            $("#menu-page").css("left","0vw");
+            $("#menu-page").css("border-radius","0px");
+        },400);
+    }
+    else if ($("#menu-btn").attr("class") === "close")
+    {
+        $("#menu-btn").attr("class","menu");
+
+        $("#menu-page").css("top","-100vh");
+        $("#menu-page").css("left","100vw");
+            $("#menu-page > text").css("color","transparent");
+            $("#menu-page").css("border-radius","50px");
+    }
+}
+</script>
+<script src="quagga.min.js" type="text/javascript"></script>
+<script src="live_w_locator.js" type="text/javascript"></script>
+</body>
 </html>

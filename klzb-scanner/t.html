@@ -1,68 +1,22 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <script src="https://cdn.jsdelivr.net/npm/quagga"></script>
-
-</head>
-<body>
-  <input type="file" id="file-selector" accept="image/*">
-  <canvas id="barcode-scanner" style="display:none;"></canvas>
-<script type="text/javascript">
-// Initialize QuaggaJS with desired settings
-Quagga.init({
-    inputStream : {
-      name : "Live",
-      type : "LiveStream",
-      target: document.querySelector('#barcode-scanner')    // Or '#yourElement' (optional)
-    },
-    decoder : {
-        readers : ["ean_reader"]    // List of barcode types to scan for
-    }
-}, function(err) {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    console.log("Initialization finished. Ready to start");
-    Quagga.start();
-});
-
-// Register a listener to scan barcodes and handle results
-Quagga.onDetected(function(result) {
-    var code = result.codeResult.code;
-    console.log("Barcode detected and processed : [" + code + "]");
-    // Handle the scanned code as per your application's requirement
-});
-
-// Function to stop the scanner (optional)
-function stopScanner() {
-    Quagga.stop();
-}
-
-// Function to scan a file (optional, if you want to scan a barcode from an image file)
-document.getElementById('file-selector').addEventListener('change', function(e) {
-    var file = e.target.files[0];
-    if (!file) return;
-    var image = new Image();
-    image.onload = function() {
-        Quagga.decodeSingle({
-            src: URL.createObjectURL(file),
-            numOfWorkers: 0,  // Needs to be 0 when used within node
-            inputStream: {
-                size: 800  // restrict input-size to be 800px in width (long-side)
-            },
-            decoder: {
-                readers: ["ean_reader"] // List of barcode types to scan for
-            },
-        }, function(result) {
-            console.log("Decoding complete. Result: ", result);
-            // Handle the scanned code as per your application's requirement
-        });
-    };
-    image.src = URL.createObjectURL(file);
-});
-
-</script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>KLZB-scanner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="styles2.css" /> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+      <div id="interactive" class="viewport">
+        
+      </div>
+      <div id="result_strip">
+        <ul class="thumbnails"></ul>
+      </div>
+    <audio id="audio" src="scan.mp3"></audio>
+    <script src="quagga.min.js" type="text/javascript"></script>
+    <script src="live_w_locator.js" type="text/javascript"></script>
+  </body>
 </html>

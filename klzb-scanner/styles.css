@@ -1,0 +1,24 @@
+body{
+    transition:300ms;
+    margin:0px;
+    /*user-select:none;*/
+    touch-action:manipulation;
+    /*overflow-X:hidden;*/
+    font-family:sans-serif;
+}
+#interactive{
+    width: 100vw;
+    height: 50vh;
+}
+#interactive > video {
+    width: 100vw;
+    height: 50vh;
+}
+
+#interactive > canvas {
+    display: none;
+/*    position: absolute;
+    width: 100vw;
+    height: 50vh;
+    left: 0px;*/
+}

@@ -1,114 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Flashlight Control</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  button {
-    font-size: 18px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-</style>
+  <title></title>
 </head>
 <body>
-  <button id="toggleButton" data="off" onclick="torch(this)">Turn On Flashlight</button>
+  <button id="shareButton">aaaa</button>
+<script type="text/javascript">
+document.getElementById('shareButton').addEventListener('click', async () => {
+    // Text to share
+    const textToShare = 'Check out this awesome text!';
 
-  <script>
-    // Function to handle flashlight control
-    // function toggleFlashlight() {
-    //   if ('torch' in navigator) {
-    //     navigator.torch.toggle().then(function() {
-    //       console.log('Torch is now ' + (navigator.torch.active ? 'on' : 'off'));
-    //     }).catch(function(err) {
-    //       console.error('Failed to toggle torch:', err);
-    //     });
-    //   } else {
-    //     console.error('Torch API not supported');
-    //   }
-    // }
-
-    // Event listener for the button click
-    function torch(e){
-        if ($(e).attr("data") === "off") {
-            $(e).attr("data","on");
-            $(e).html("|");
-            flashon();
-        }
-        else if ($(e).attr("data") === "on") {
-            $(e).attr("data","off");
-            $(e).html("O");
-            flashoff();
-        }
-    }
-
-
-  function flashon(){
-    const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
-    if (SUPPORTS_MEDIA_DEVICES) {
-      navigator.mediaDevices.enumerateDevices().then(devices => {
-        const cameras = devices.filter((device) => device.kind === 'videoinput');
-        if (cameras.length === 0) {
-          throw 'No camera found on this device.';
-        }
-        const camera = cameras[cameras.length - 1];
-        navigator.mediaDevices.getUserMedia({
-          video: {
-            deviceId: camera.deviceId,
-            facingMode: ['user', 'environment'],
-            height: {ideal: 1080},
-            width: {ideal: 1920}
-          }
-        }).then(stream => {
-          const track = stream.getVideoTracks()[0];
-          const imageCapture = new ImageCapture(track)
-          const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
-              track.applyConstraints({
-                advanced: [{torch: true}]
-              });
-          });
-        });
-      });
-    }
-  }
-  function flashoff(){
-      const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
-      if (SUPPORTS_MEDIA_DEVICES) {
-        navigator.mediaDevices.enumerateDevices().then(devices => {
-          const cameras = devices.filter((device) => device.kind === 'videoinput');
-          if (cameras.length === 0) {
-            throw 'No camera found on this device.';
-          }
-          const camera = cameras[cameras.length - 1];
-          navigator.mediaDevices.getUserMedia({
-            video: {
-              deviceId: camera.deviceId,
-              facingMode: ['user', 'environment'],
-              height: {ideal: 1080},
-              width: {ideal: 1920}
-            }
-          }).then(stream => {
-            const track = stream.getVideoTracks()[0];
-            const imageCapture = new ImageCapture(track)
-            const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
-                track.applyConstraints({
-                  advanced: [{torch: false}]
-                });
+    // Check if Web Share API is supported
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: document.title,
+                text: textToShare
             });
-          });
-        });
-      }
-  }
-  </script>
+            console.log('Text shared successfully');
+        } catch (error) {
+            console.error('Error sharing text:', error);
+        }
+    } else {
+        // Fallback for browsers that do not support Web Share API
+        console.log('Web Share API is not supported');
+        // Implement your own fallback sharing method (e.g., copying to clipboard)
+        // Example: copyToClipboard(textToShare);
+    }
+});
+
+// Example function for copying text to clipboard (fallback method)
+function copyToClipboard(text) {
+    const tempTextArea = document.createElement('textarea');
+    tempTextArea.value = text;
+    document.body.appendChild(tempTextArea);
+    tempTextArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempTextArea);
+    console.log('Text copied to clipboard:', text);
+}
+
+</script>
 </body>
 </html>

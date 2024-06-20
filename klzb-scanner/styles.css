@@ -5,6 +5,7 @@ body{
     touch-action:manipulation;
     overflow-X:hidden;
     font-family:sans-serif;
+    background: black;
 }
 #bar{
     position: fixed;
@@ -14,11 +15,12 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: yellow;
+    color: white;
     background: #80808040;
     backdrop-filter: blur(10px);
     border-radius: 50px;
     margin: 5vw;
+    transition: 2000ms;
 }
 #interactive{
     position: fixed;
@@ -46,7 +48,8 @@ body{
     backdrop-filter: blur(5px);
     border-radius: 25px 0px 0px 0px;
     right: 0px;
-    bottom: 70vh;
+    top: 30vh;
+    transform: translateY(-50px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,7 +58,10 @@ body{
 }
 .material-icons{
     transition: 500ms;
+    cursor: pointer;
 }
+
+
 #count{
     min-width: 50px;
     height: 50px;
@@ -71,7 +77,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 500ms;
+    box-shadow: 0px 0px 10px -5px;
+    font-size: 25px;
 }
 #result_strip{
     position: fixed;
@@ -85,4 +92,24 @@ body{
     color: white;
     padding-top: 50px;
     padding-bottom: 50px;
+}
+#options{
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    width: 50px;
+    background: gray;
+    margin-bottom: 25px;
+    border-radius: 25px 0px 0px 25px;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px -5px;
+}
+#options > .material-icons{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    place-content: center;
+}
+#options > .material-icons:hover{
+    background: yellow;
 }

@@ -280,91 +280,170 @@ $(function() {
             }
         }
     });
-var datas=[];
-var count = 0;
+
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
-        // if (App.lastResult !== code) {
-            if (!isNaN(code) == true) {
+        const audio = document.getElementById('audio');
+        const err_sound = document.getElementById('err_sound');
+        const already_ascanned = document.getElementById('already_ascanned');
+
+        const already_scanned_voice = document.getElementById('already_scanned_voice');
+        const length_not_12_voice = document.getElementById('length_not_12_voice');
+        const not_a_number_voice = document.getElementById('not_a_number_voice');
+        if (App.lastResult !== code) {
+            if (!isNaN(code) === true) {
                 if (code.length === 12) {
-                    App.lastResult = code;
-                    datas.push(code);
-                    count = count + 1;
-                    var $node = null
-                    const audio = document.getElementById('audio');
-                    audio.play();
-                    $("#result_strip").prepend(code+"<br/>");
-                    $("#count").html(count);
-                    $("#bar").html("last_scanned: "+code);
-                    console.log(datas);
+                    if (datas.includes(code) === false) {
+                        App.lastResult = code;
+                        datas.push(code);
+                        count = count + 1;
+                        var $node = null
+                        audio.play();
+                        navigator.vibrate(500);
+                        $("#result_strip").prepend(code+"<br/>");
+                        $("#count").html(count);
+                        $("#bar").html("last_scanned: "+code);
+                        $("#bar").css("background","#00800080");
+                        $("#bar").css("color","white");
+                        console.clear();
+                        console.log(datas);
+                    }
+                    else
+                    {
+                        already_ascanned.play();
+                        already_scanned_voice.play();
+                        navigator.vibrate([250,250]);
+                        $("#bar").html(code + ": already_ascanned");
+                        $("#bar").css("background","#ffff0080");
+                        $("#bar").css("color","black");
+                    }
                 }
                 else{
-                    $("#bar").html(code + ": is not have 12 length");
+                    err_sound.play();
+                    length_not_12_voice.play();
+                    $("#bar").html(code + ": is not a 12 length");
+                    $("#bar").css("background","#ff000080");
+                    $("#bar").css("color","black");
+                    
                 }
             }
             else{
+                err_sound.play();
+                not_a_number_voice.play();
                 $("#bar").html(code + "= not a TID");
+                $("#bar").css("background","#ff000080");
+                $("#bar").css("color","black");
             }
 
-        // }
+        }
     });
 
 });
+var datas=[];
+var count = 0;
 
-    function flashon(){
-        const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
-        if (SUPPORTS_MEDIA_DEVICES) {
-          navigator.mediaDevices.enumerateDevices().then(devices => {
-            const cameras = devices.filter((device) => device.kind === 'videoinput');
-            if (cameras.length === 0) {
-              throw 'No camera found on this device.';
-            }
-            const camera = cameras[cameras.length - 1];
-            navigator.mediaDevices.getUserMedia({
-              video: {
-                deviceId: camera.deviceId,
-                facingMode: ['user', 'environment'],
-                height: {ideal: 1080},
-                width: {ideal: 1920}
-              }
-            }).then(stream => {
-              const track = stream.getVideoTracks()[0];
-              const imageCapture = new ImageCapture(track)
-              const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
-                  track.applyConstraints({
-                    advanced: [{torch: true}]
-                  });
-              });
-            });
-          });
+function data_share(){
+    navigator.share({
+        title: document.title,
+        text: datas
+    });
+}
+
+function screen_toggle(e){
+    var elem = document.documentElement;
+    if($(e).attr('data')==='off'){
+        $(e).html('&#xe5d1;');
+        $(e).attr('data','on');
+
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
         }
     }
-
-    function flashoff(){
-        const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
-        if (SUPPORTS_MEDIA_DEVICES) {
-          navigator.mediaDevices.enumerateDevices().then(devices => {
-            const cameras = devices.filter((device) => device.kind === 'videoinput');
-            if (cameras.length === 0) {
-              throw 'No camera found on this device.';
-            }
-            const camera = cameras[cameras.length - 1];
-            navigator.mediaDevices.getUserMedia({
-              video: {
-                deviceId: camera.deviceId,
-                facingMode: ['user', 'environment'],
-                height: {ideal: 1080},
-                width: {ideal: 1920}
-              }
-            }).then(stream => {
-              const track = stream.getVideoTracks()[0];
-              const imageCapture = new ImageCapture(track)
-              const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
-                  track.applyConstraints({
-                    advanced: [{torch: false}]
-                  });
-              });
-            });
-          });
+    else if($(e).attr('data')==='on'){
+        $(e).html('&#xe5d0;');
+        $(e).attr('data','off');
+        
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
         }
     }
+}
+
+function torch(e){
+    if ($(e).attr("data") === "off") {
+        $(e).attr("data","on");
+        $(e).html("<i class='material-icons' style='color:white;'>&#xf00a;</i>");
+        // flashon();
+    }
+    else if ($(e).attr("data") === "on") {
+        $(e).attr("data","off");
+        $(e).html("<i class='material-icons'>&#xf00b;</i>");
+        // flashoff();
+    }
+}
+
+function flashon(){
+    const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
+    if (SUPPORTS_MEDIA_DEVICES) {
+      navigator.mediaDevices.enumerateDevices().then(devices => {
+        const cameras = devices.filter((device) => device.kind === 'videoinput');
+        if (cameras.length === 0) {
+          throw 'No camera found on this device.';
+        }
+        const camera = cameras[cameras.length - 1];
+        navigator.mediaDevices.getUserMedia({
+          video: {
+            deviceId: camera.deviceId,
+            facingMode: ['user', 'environment'],
+            height: {ideal: 1080},
+            width: {ideal: 1920}
+          }
+        }).then(stream => {
+          const track = stream.getVideoTracks()[0];
+          const imageCapture = new ImageCapture(track)
+          const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
+              track.applyConstraints({
+                advanced: [{torch: true}]
+              });
+          });
+        });
+      });
+    }
+}
+
+function flashoff(){
+    const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
+    if (SUPPORTS_MEDIA_DEVICES) {
+      navigator.mediaDevices.enumerateDevices().then(devices => {
+        const cameras = devices.filter((device) => device.kind === 'videoinput');
+        if (cameras.length === 0) {
+          throw 'No camera found on this device.';
+        }
+        const camera = cameras[cameras.length - 1];
+        navigator.mediaDevices.getUserMedia({
+          video: {
+            deviceId: camera.deviceId,
+            facingMode: ['user', 'environment'],
+            height: {ideal: 1080},
+            width: {ideal: 1920}
+          }
+        }).then(stream => {
+          const track = stream.getVideoTracks()[0];
+          const imageCapture = new ImageCapture(track)
+          const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
+              track.applyConstraints({
+                advanced: [{torch: false}]
+              });
+          });
+        });
+      });
+    }
+}

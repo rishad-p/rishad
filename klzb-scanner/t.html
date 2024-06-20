@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <title>KLZB-scanner</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="icon" href="" sizes="any" type="any">
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <!-- <link rel="stylesheet" type="text/css" href="styles2.css" /> -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -18,20 +18,21 @@
     <div id="result_strip">
         
     </div>
+    <div id="options">
+        <i class="material-icons" onclick="data_share()">&#xe14d;</i>
+        <i class="material-icons" onclick="data_share()">&#xe80d;</i>
+        <i class="material-icons">&#xe88f;</i>
+        <i class="material-icons" data="off" onclick="screen_toggle(this)">&#xe5d0;</i>
+    </div>
+<audio id="already_scanned_voice" src="assets/already scanned voice.mp3"></audio>
+<audio id="length_not_12_voice" src="assets/length not 12 voice.mp3"></audio>
+<audio id="not_a_number_voice" src="assets/not a number voice.mp3"></audio>
+
 <audio id="audio" src="scan.mp3"></audio>
+<audio id="already_ascanned" src="already_ascanned.wav"></audio>
+<audio id="err_sound" src="erro.mp3"></audio>
 <script type="text/javascript">
-    function torch(e){
-        if ($(e).attr("data") === "off") {
-            $(e).attr("data","on");
-            $(e).html("<i class='material-icons' style='color:white;'>&#xf00a;</i>");
-            // flashon();
-        }
-        else if ($(e).attr("data") === "on") {
-            $(e).attr("data","off");
-            $(e).html("<i class='material-icons'>&#xf00b;</i>");
-            // flashoff();
-        }
-    }
+
 </script>
 <script src="quagga.min.js" type="text/javascript"></script>
 <script src="live_w_locator.js" type="text/javascript"></script>

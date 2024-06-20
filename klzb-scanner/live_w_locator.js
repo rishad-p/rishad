@@ -1,3 +1,18 @@
+var datas=[];
+var count = 0;
+
+const audio = document.getElementById('audio');
+const err_sound = document.getElementById('err_sound');
+const already_ascanned = document.getElementById('already_ascanned');
+
+const already_scanned_voice = document.getElementById('already_scanned_voice');
+const length_not_12_voice = document.getElementById('length_not_12_voice');
+const not_a_number_voice = document.getElementById('not_a_number_voice');
+
+already_scanned_voice.muted = true;
+length_not_12_voice.muted = true;
+not_a_number_voice.muted = true;
+
 $(function() {
     var resultCollector = Quagga.ResultCollector.create({
         capture: true,
@@ -283,13 +298,6 @@ $(function() {
 
     Quagga.onDetected(function(result) {
         var code = result.codeResult.code;
-        const audio = document.getElementById('audio');
-        const err_sound = document.getElementById('err_sound');
-        const already_ascanned = document.getElementById('already_ascanned');
-
-        const already_scanned_voice = document.getElementById('already_scanned_voice');
-        const length_not_12_voice = document.getElementById('length_not_12_voice');
-        const not_a_number_voice = document.getElementById('not_a_number_voice');
         if (App.lastResult !== code) {
             if (!isNaN(code) === true) {
                 if (code.length === 12) {
@@ -310,6 +318,7 @@ $(function() {
                     }
                     else
                     {
+                        App.lastResult = code;
                         already_ascanned.play();
                         already_scanned_voice.play();
                         navigator.vibrate([250,250]);
@@ -319,6 +328,7 @@ $(function() {
                     }
                 }
                 else{
+                    App.lastResult = code;
                     err_sound.play();
                     length_not_12_voice.play();
                     $("#bar").html(code + ": is not a 12 length");
@@ -328,6 +338,7 @@ $(function() {
                 }
             }
             else{
+                App.lastResult = code;
                 err_sound.play();
                 not_a_number_voice.play();
                 $("#bar").html(code + "= not a TID");
@@ -339,14 +350,43 @@ $(function() {
     });
 
 });
-var datas=[];
-var count = 0;
+
+function login(){
+    if($("#un").val() === 'klzb' && $("#pw").val() === 'klzb@123'){
+        $("#login_window").css("transform","translate(25px, 25px)");
+        setTimeout(function(){
+            $("#login_window").css("transform","translate(-100vw, -100vh)");
+        },400);
+    }
+    else{
+        alert(' ');
+    }
+}
 
 function data_share(){
     navigator.share({
         title: document.title,
         text: datas
     });
+}
+
+function voice_toggle(e){
+    if($(e).attr('data')==='off'){
+        $(e).html('&#xe050;');
+        $(e).attr('data','on');
+
+        already_scanned_voice.muted = false;
+        length_not_12_voice.muted = false;
+        not_a_number_voice.muted = false;
+    }
+    else if($(e).attr('data')==='on'){
+        $(e).html('&#xe04f;');
+        $(e).attr('data','off');
+
+        already_scanned_voice.muted = true;
+        length_not_12_voice.muted = true;
+        not_a_number_voice.muted = true;
+    }
 }
 
 function screen_toggle(e){

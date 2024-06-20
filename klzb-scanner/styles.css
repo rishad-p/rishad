@@ -20,7 +20,7 @@ body{
     backdrop-filter: blur(10px);
     border-radius: 50px;
     margin: 5vw;
-    transition: 2000ms;
+    transition: 300ms;
 }
 #interactive{
     position: fixed;
@@ -53,11 +53,11 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 500ms;
+    transition: 300ms;
     cursor: pointer;
 }
 .material-icons{
-    transition: 500ms;
+    transition: 300ms;
     cursor: pointer;
 }
 

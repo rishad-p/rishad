@@ -2,43 +2,43 @@
 <html>
 <head>
   <title></title>
+<style type="text/css">
+
+</style>
 </head>
 <body>
   <button id="shareButton">aaaa</button>
 <script type="text/javascript">
-document.getElementById('shareButton').addEventListener('click', async () => {
-    // Text to share
-    const textToShare = 'Check out this awesome text!';
-
-    // Check if Web Share API is supported
-    if (navigator.share) {
-        try {
-            await navigator.share({
-                title: document.title,
-                text: textToShare
-            });
-            console.log('Text shared successfully');
-        } catch (error) {
-            console.error('Error sharing text:', error);
+    $(window).on('load', function() {
+        console.log(localStorage.count);
+        if(typeof(Storage) !== "undefined") {
+          if(localStorage.count) {
+            localStorage.count = Number(localStorage.count)+1;
+          } else {
+            localStorage.count = 1;
+          }
         }
-    } else {
-        // Fallback for browsers that do not support Web Share API
-        console.log('Web Share API is not supported');
-        // Implement your own fallback sharing method (e.g., copying to clipboard)
-        // Example: copyToClipboard(textToShare);
-    }
-});
+    });
 
-// Example function for copying text to clipboard (fallback method)
-function copyToClipboard(text) {
-    const tempTextArea = document.createElement('textarea');
-    tempTextArea.value = text;
-    document.body.appendChild(tempTextArea);
-    tempTextArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempTextArea);
-    console.log('Text copied to clipboard:', text);
-}
+
+
+    $(window).on('load', function() {
+        var previous_count = false;
+        var intervalId = setInterval(function() {
+            if(typeof(Storage) !== "undefined") {
+              if(previous_count != localStorage.count) {
+                    $.ajax("{{route('admin.ajax_render')}}").then(function(response){
+                        previous_count = localStorage.count;
+                        $("#ajax_render").empty();
+                        $("#ajax_render").append(response);
+                    }).fail(function(err){
+                        $("#ajax_render").empty();
+                        $("#ajax_render").append(JSON.stringify(err));
+                    });
+              }
+            }
+        }, 200);
+    });
 
 </script>
 </body>

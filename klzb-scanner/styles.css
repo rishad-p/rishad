@@ -1,11 +1,53 @@
 body{
-    transition:300ms;
     margin:0px;
     /*user-select:none;*/
     touch-action:manipulation;
     overflow-X:hidden;
     font-family:sans-serif;
     background-color: black;
+    transition: 200ms;
+}
+@media (prefers-color-scheme: light) {
+    body {
+        color: black;
+        background: white;
+    }
+    .theme{
+        color: black;
+        background: white;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        color: white;
+        background: black;
+    }
+    .theme{
+        color: white;
+        background: black;
+    }
+}
+#login_window{
+    position: fixed;
+    z-index: 9;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 500ms;
+}
+#login_form{
+    width: 300px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 0px 3px;
+    padding: 20px;
+}
+.login-btn{
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 15px;
 }
 #bar{
     position: fixed;
@@ -53,11 +95,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 300ms;
     cursor: pointer;
 }
 .material-icons{
-    transition: 300ms;
     cursor: pointer;
 }
 
@@ -83,15 +123,14 @@ body{
 #result_strip{
     position: fixed;
     width: 100vw;
-    height: 50vh;
+    height: 70vh;
     overflow: scroll;
     top: 30vh;
     text-align: center;
-    background: #80808080;
     backdrop-filter: blur(5px);
-    color: white;
     padding-top: 50px;
     padding-bottom: 50px;
+    transition: 200ms;
 }
 #options{
     position: fixed;

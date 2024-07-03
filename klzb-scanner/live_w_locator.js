@@ -351,15 +351,20 @@ $(function() {
 
 });
 
+if (localStorage.login_stat === "true") {
+    $("#login_window").css("display","none");
+}
+
 function login(){
     if($("#un").val() === 'klzb' && $("#pw").val() === 'klzb@123'){
+        localStorage.login_stat = "true";
         $("#login_window").css("transform","translate(25px, 25px)");
         setTimeout(function(){
             $("#login_window").css("transform","translate(-100vw, -100vh)");
         },400);
     }
     else{
-        alert(' ');
+        alert('incorrect_credentials');
     }
 }
 

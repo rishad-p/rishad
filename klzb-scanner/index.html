@@ -11,23 +11,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <div id="login_window" style="
-        position: fixed;
-        z-index: 9;
-        width: 100vw;
-        height: 100vh;
-        background: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: 500ms;
-    ">
-        <div style="
-            width: 300px;
-            border-radius: 15px;
-            box-shadow: 0px 0px 0px 3px;
-            padding: 20px;
-        ">
+    <div id="login_window">
+        <div id="login_form">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Username</label>
                 <input type="text" class="form-control" id="un" placeholder="user_name">
@@ -37,11 +22,7 @@
                 <input type="password" id="pw" class="form-control" aria-describedby="passwordHelpBlock">
             </div>
             <div class="mb-3" style="display: grid;">
-                <button onclick="login()" class="btn btn-success" style="
-                    padding-left: 25px;
-                    padding-right: 25px;
-                    border-radius: 15px;
-                ">Log In</button>
+                <button onclick="login()" class="btn btn-success login-btn">Log In</button>
             </div>
         </div>
     </div>
@@ -50,7 +31,7 @@
         <div id="torch-btn" data="off" onclick="torch(this)"><i class="material-icons">&#xf00b;</i></div>
     </div>
     <div id="count">0</div>
-    <div id="result_strip">
+    <div id="result_strip" class="theme">
         
     </div>
     <div id="options">

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500mm"
+   height="500mm"
+   viewBox="0 0 500 500"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="bg.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#000000"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.21202301"
+     inkscape:cx="752.27685"
+     inkscape:cy="931.50268"
+     inkscape:window-width="1366"
+     inkscape:window-height="768"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#404040;fill-opacity:1;stroke-width:0.285648"
+       id="rect9787"
+       width="554.00116"
+       height="548.33704"
+       x="-25.642681"
+       y="-24.878948" />
+    <circle
+       style="fill:#ffffff;fill-opacity:0.1;stroke-width:0.264583"
+       id="path4388"
+       cx="130.01816"
+       cy="133.37598"
+       r="67.81366" />
+    <circle
+       style="fill:#ffffff;fill-opacity:0.15;stroke-width:0.150622"
+       id="path4388-3"
+       cx="390.97733"
+       cy="224.00444"
+       r="38.604908" />
+    <circle
+       style="fill:#ffffff;fill-opacity:0.2;stroke-width:0.176733"
+       id="path9551"
+       cx="87.246101"
+       cy="338.4852"
+       r="20.046976" />
+    <circle
+       style="fill:#ffffff;fill-opacity:0.25;stroke-width:0.264583"
+       id="path9605"
+       cx="439.96249"
+       cy="428.18475"
+       r="7.2160163" />
+  </g>
+</svg>

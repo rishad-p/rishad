@@ -6,3 +6,46 @@ body{
     overflow-X:hidden;
     font-family:sans-serif;
 }
+#boot_bg{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    right: 0px;
+    z-index: 1;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: 500ms;
+}
+.cir{
+    border-radius: 100%;
+    background: yellow;
+    transition: 500ms;
+    margin: 4px;
+}
+#bg{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('bg.svg');
+    background-size: 100%;
+    background-position: 0% 10%;
+    transition: 1000ms;
+}
+.dp{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('r.png');
+    background-size: contain;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}

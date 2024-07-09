@@ -1,16 +1,9 @@
+<!DOCTYPE html>
 <html>
+<head>
+	<title></title>
+</head>
 <body>
-	<text id="val">0</text>
-<script>
-// Request permission for iOS 13+ devices
-if ( DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function" ) {
-	DeviceMotionEvent.requestPermission();
-}
-window.addEventListener("devicemotion", function(e){
-	value = Math.trunc(e.accelerationIncludingGravity.y);
-	document.getElementById('val').innerHTML = value;
-});
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 </body>
 </html>

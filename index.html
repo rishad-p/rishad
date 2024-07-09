@@ -1,33 +1,37 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Rishad P</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="icon" href="logo.png" sizes="any" type="any">
+    <link rel="icon" href="" sizes="any" type="any">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
-<div style="
-    width: 100vw;
-    height: 100vh;
-    background-image: url('bg.svg');
-    background-size: cover;
-    background-position: 0% 10%;
-    transition: 300ms;
-">
-    <div style="
-        width: 100vw;
-        height: 100vh;
-        background-image: url('r.png');
-        background-size: contain;
-        background-position: bottom right;
-        background-repeat: no-repeat;
-    ">
-        
+<body onload="load()">
+<div id="boot_bg">
+    <div id="cir1" class="cir" style="
+        width: 0px;
+        height: 0px;
+    "></div>
+    <div id="cir2" class="cir" style="
+        width: 0px;
+        height: 0px;
+    "></div>
+    <div id="cir3" class="cir" style="
+        width: 0px;
+        height: 0px;
+    "></div>
+    <div id="cir4" class="cir" style="
+        width: 100px;
+        height: 100px;
+        animation: rotate 4000ms linear infinite;
+    "></div>
+</div>
+
+<div id="bg">
+    <div class="dp">
     </div>
 </div>
 <script type="text/javascript" src="scripts.js"></script>

@@ -43,8 +43,8 @@ function load(){
 			$("#cir4").css("width", "60px");
 			$("#cir4").css("height", "10px");
 			$("#boot_bg").css("background", "#ffffff40");
-			$("#boot_bg").css("width", "80px");
-			$("#boot_bg").css("height", "80px");
+			$("#boot_bg").css("width", "70px");
+			$("#boot_bg").css("height", "70px");
 			$("#boot_bg").css("top", "10px");
 			$("#boot_bg").css("right", "10px");
 		}, 300);
@@ -69,6 +69,7 @@ function menu_toggle(){
 		$(".cir").css("height", "50px");
 		$(".cir").css("margin", "20px");
 		$("#cir1").attr("onclick", "navigate_menu('bg')");
+		$("#cir2").attr("onclick", "navigate_menu('contents')");
 		$("#cir4").attr("onclick", "navigate_menu('contents')");
 		$("#rishad").css("transform", "scale(100%)");
 		setTimeout(() =>{
@@ -88,8 +89,8 @@ function menu_toggle(){
 		$("#rishad").css("transform", "scale(0%)");
 		setTimeout(() =>{
 			$("#boot_bg").attr("onclick", "menu_toggle()");
-			$("#boot_bg").css("width", "80px");
-			$("#boot_bg").css("height", "80px");
+			$("#boot_bg").css("width", "70px");
+			$("#boot_bg").css("height", "70px");
 			$("#boot_bg").css("border-radius", "20px");
 			$("#boot_bg").css("top", "10px");
 			$("#boot_bg").css("right", "10px");
@@ -109,6 +110,7 @@ function menu_toggle(){
 			$(".cir").css("background", "yellow");
 			$(".cir").css("box-shadow", "none");
 			$("#cir1").attr("onclick", " ");
+			$("#cir2").attr("onclick", " ");
 			$("#cir4").attr("onclick", " ");
 		}, 300);
 	}

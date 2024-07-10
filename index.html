@@ -10,29 +10,41 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onload="load()">
-<div id="boot_bg">
+<div id="boot_bg" data="off">
+    <div id="close" onclick="menu_toggle()">
+        <i class="material-icons" style="font-size: 50px;font-weight: bold;">&#xe5cd;</i>
+    </div>
     <div id="cir1" class="cir" style="
         width: 0px;
         height: 0px;
-    "></div>
+    ">Home</div>
     <div id="cir2" class="cir" style="
         width: 0px;
         height: 0px;
-    "></div>
+    ">cv</div>
     <div id="cir3" class="cir" style="
         width: 0px;
         height: 0px;
-    "></div>
+    ">iot</div>
     <div id="cir4" class="cir" style="
         width: 100px;
         height: 100px;
         animation: rotate 4000ms linear infinite;
-    "></div>
+    ">contents</div>
+    <text id="rishad">rishad</text>
 </div>
 
 <div id="bg">
     <div class="dp">
     </div>
+</div>
+<div id="contents" style="
+    width: 100vw;
+    height: 100vh;
+    transition: 1000ms;
+    background: gray;
+">
+    
 </div>
 <script type="text/javascript" src="scripts.js"></script>
 </body>

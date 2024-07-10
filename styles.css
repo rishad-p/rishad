@@ -10,6 +10,7 @@ body{
     width: 100vw;
     height: 100vh;
     position: fixed;
+    top: 0px;
     right: 0px;
     z-index: 1;
     background: black;
@@ -19,11 +20,40 @@ body{
     flex-direction: column;
     transition: 500ms;
 }
-.cir{
-    border-radius: 100%;
-    background: yellow;
+#close{
+    position: absolute;
     transition: 500ms;
-    margin: 4px;
+    top: 10px;
+    right: 10px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    background: transparent;
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+    color: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cir{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    border-radius: 100%;
+    font-size: 50px;
+    background: yellow;
+    color: yellow;
+    overflow: hidden;
+    transition: 500ms;
+    margin: 3px;
+}
+#rishad{
+    position: absolute;
+    transition: 500ms;
+    bottom: 0px;
+    color: yellow;
+    transform: scale(0%);
 }
 #bg{
     width: 100vw;

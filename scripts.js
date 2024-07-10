@@ -58,8 +58,11 @@ function load(){
 }
 
 function menu_toggle(e){
-	if(){
-
+	if($(e).attr("data") === "off"){
+        
+	}
+	else if($(e).attr("data") === "on"){
+	    
 	}
 	$("#boot_bg").css("width", "100vw");
 	$("#boot_bg").css("height", "100vh");

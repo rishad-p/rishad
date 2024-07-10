@@ -34,7 +34,7 @@ function load(){
         $("#boot_bg").css("border-radius", "20px");
 		$("#boot_bg").css("background", "#ffffff40");
 		$("#boot_bg").css("backdrop-filter", "blur(10px)");
-		$("#boot_bg").attr("onclick", "open_menu()");
+		$("#boot_bg").attr("onclick", "menu_toggle(this)");
 		setTimeout(() =>{
 			clearInterval(boot);
 			$(".cir").css("animation", "none");
@@ -57,7 +57,10 @@ function load(){
 	}, 2000);
 }
 
-function open_menu(){
+function menu_toggle(e){
+	if(){
+
+	}
 	$("#boot_bg").css("width", "100vw");
 	$("#boot_bg").css("height", "100vh");
 

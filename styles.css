@@ -48,6 +48,33 @@ body{
     transition: 500ms;
     margin: 3px;
 }
+#back{
+    transition: 500ms;
+    position: absolute;
+    /*top: 10px;*/
+    /*left: 10px;*/
+    border-radius: 0px 20px 20px 20px;
+    background: transparent;
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+    color: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#config{
+    width: 0%;
+    height: 0%;
+    position: absolute;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+#config > div {
+    font-size: 50px;
+}
 #rishad{
     position: absolute;
     transition: 500ms;
@@ -62,6 +89,16 @@ body{
     background-size: 100%;
     background-position: 0% 10%;
     transition: 1000ms;
+}
+#contents{
+    width: 100vw;
+    height: 100vh;
+    transition: 1000ms;
+    background: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .dp{
     width: 100vw;

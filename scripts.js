@@ -69,7 +69,7 @@ function menu_toggle(){
 		$(".cir").css("height", "50px");
 		$(".cir").css("margin", "20px");
 		$("#cir1").attr("onclick", "navigate_menu('bg')");
-		$("#cir2").attr("onclick", "navigate_menu('contents')");
+		$("#cir2").attr("onclick", "open_config()");
 		$("#cir4").attr("onclick", "navigate_menu('contents')");
 		$("#rishad").css("transform", "scale(100%)");
 		setTimeout(() =>{
@@ -86,6 +86,18 @@ function menu_toggle(){
 		$("#boot_bg").attr("data", "off");
 		$("#boot_bg").css("top", "10vh");
 		$("#boot_bg").css("right", "10vh");
+
+	$("#cir2").css("border-radius", "100px");
+	$("#cir2").css("display", "flex");
+	$("#cir2").css("font-size", "50px");
+
+	$("#back").css("width", "0px");
+	$("#back").css("height", "0px");
+	$("#back").css("box-shadow", "none");
+
+	$("#config").css("height", "0%");
+	$("#config").css("width", "0%");
+
 		$("#rishad").css("transform", "scale(0%)");
 		setTimeout(() =>{
 			$("#boot_bg").attr("onclick", "menu_toggle()");
@@ -119,4 +131,102 @@ function menu_toggle(){
 function navigate_menu(value){
     $('html,body').animate({scrollTop: $("#"+value).offset().top},'slow');
     menu_toggle();
+}
+
+function open_config(){
+	$("#cir2").css("height", "50vh");
+	$("#cir2").css("width", "50vh");
+	$("#cir2").css("border-radius", "0px 50px 50px 50px");
+	$("#cir2").css("display", "unset");
+	$("#cir2").css("font-size", "0px");
+	// $("#cir2").html("");
+	$("#cir2").attr("onclick", "");
+
+	$(".cir").css("margin", "0px");
+
+	$("#cir1").css("width", "0px");
+	$("#cir1").css("height", "0px");
+	$("#cir1").css("box-shadow", "none");
+
+	$("#cir3").css("width", "0px");
+	$("#cir3").css("height", "0px");
+	$("#cir3").css("box-shadow", "none");
+	$("#cir4").css("width", "0px");
+	$("#cir4").css("height", "0px");
+	$("#cir4").css("box-shadow", "none");
+
+	$("#back").css("width", "70px");
+	$("#back").css("height", "70px");
+	$("#back").css("box-shadow", "yellow 0px 0px 0px 4px");
+	$("#back").attr("onclick", "close_config()");
+
+	$("#config").css("height", "50vh");
+	$("#config").css("width", "50vh");
+
+	$("#rishad").css("transform", "scale(0%)");
+}
+
+function close_config(){
+	$("#cir2").css("border-radius", "100px");
+	$("#cir2").css("display", "flex");
+	$("#cir2").css("font-size", "50px");
+	// $("#cir2").html("Config");
+	setTimeout(() =>{
+		$("#cir2").attr("onclick", "open_config()");
+	}, 500)
+	$(".cir").css("width", "250px");
+	$(".cir").css("height", "50px");
+	$(".cir").css("margin", "20px");
+	$(".cir").css("box-shadow", "0px 0px 0px 4px yellow");
+
+	$("#back").css("width", "0px");
+	$("#back").css("height", "0px");
+	$("#back").css("box-shadow", "none");
+
+	$("#config").css("height", "0%");
+	$("#config").css("width", "0%");
+
+	$("#rishad").css("transform", "scale(100%)");
+}
+
+function screen(e){
+	if ($(e).attr('data') === 'off') {
+		$(e).attr("data", "on");
+		$(e).html('&#xe5d1;');
+	    if (document.documentElement.requestFullscreen) {
+	      document.documentElement.requestFullscreen();
+	    } else if (document.documentElement.msRequestFullscreen) {
+	      document.documentElement.msRequestFullscreen();
+	    } else if (document.documentElement.mozRequestFullScreen) {
+	      document.documentElement.mozRequestFullScreen();
+	    } else if (document.documentElement.webkitRequestFullscreen) {
+	      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+	    }
+	}
+	else if ($(e).attr('data') === 'on') {
+		$(e).attr("data", "off");
+		$(e).html('&#xe5d0;');
+	    if (document.exitFullscreen) {
+	      document.exitFullscreen();
+	    } else if (document.msExitFullscreen) {
+	      document.msExitFullscreen();
+	    } else if (document.mozCancelFullScreen) {
+	      document.mozCancelFullScreen();
+	    } else if (document.webkitExitFullscreen) {
+	      document.webkitExitFullscreen();
+	    }
+	}
+}
+
+function theme(e){
+	if ($(e).attr('data') === 'off') {
+		$(e).attr("data", "on");
+		$("#contents").css("background", "white");
+		$(e).html('&#xe51c;');
+	}
+	else if ($(e).attr('data') === 'on') {
+		$(e).attr("data", "off");
+		$("#contents").css("background", "black");
+		$(e).html('&#xe518;');
+	}
 }

@@ -56,6 +56,7 @@ function load(){
 
 function menu_toggle(){
 	if($("#boot_bg").attr("data") === "off"){
+		$("body").css("overflow-y", "hidden");
 		$("#boot_bg").attr("onclick", " ");
 		$("#boot_bg").attr("data", "on");
 		$("#boot_bg").css("width", "100vw");
@@ -83,6 +84,7 @@ function menu_toggle(){
 		}, 300);
 	}
 	else if($("#boot_bg").attr("data") === "on"){
+		$("body").css("overflow-y", "auto");
 		$("#boot_bg").attr("data", "off");
 		$("#boot_bg").css("top", "10vh");
 		$("#boot_bg").css("right", "10vh");

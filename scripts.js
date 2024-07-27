@@ -86,18 +86,14 @@ function menu_toggle(){
 		$("#boot_bg").attr("data", "off");
 		$("#boot_bg").css("top", "10vh");
 		$("#boot_bg").css("right", "10vh");
-
-	$("#cir2").css("border-radius", "100px");
-	$("#cir2").css("display", "flex");
-	$("#cir2").css("font-size", "50px");
-
-	$("#back").css("width", "0px");
-	$("#back").css("height", "0px");
-	$("#back").css("box-shadow", "none");
-
-	$("#config").css("height", "0%");
-	$("#config").css("width", "0%");
-
+		$("#cir2").css("border-radius", "100px");
+		$("#cir2").css("display", "flex");
+		$("#cir2").css("font-size", "50px");
+		$("#back").css("width", "0px");
+		$("#back").css("height", "0px");
+		$("#back").css("box-shadow", "none");
+		$("#config").css("height", "0%");
+		$("#config").css("width", "0%");
 		$("#rishad").css("transform", "scale(0%)");
 		setTimeout(() =>{
 			$("#boot_bg").attr("onclick", "menu_toggle()");
@@ -135,34 +131,27 @@ function navigate_menu(value){
 
 function open_config(){
 	$("#cir2").css("height", "50vh");
-	$("#cir2").css("width", "50vh");
+	$("#cir2").css("width", "250px");
 	$("#cir2").css("border-radius", "0px 50px 50px 50px");
 	$("#cir2").css("display", "unset");
 	$("#cir2").css("font-size", "0px");
-	// $("#cir2").html("");
 	$("#cir2").attr("onclick", "");
-
 	$(".cir").css("margin", "0px");
-
 	$("#cir1").css("width", "0px");
 	$("#cir1").css("height", "0px");
 	$("#cir1").css("box-shadow", "none");
-
 	$("#cir3").css("width", "0px");
 	$("#cir3").css("height", "0px");
 	$("#cir3").css("box-shadow", "none");
 	$("#cir4").css("width", "0px");
 	$("#cir4").css("height", "0px");
 	$("#cir4").css("box-shadow", "none");
-
 	$("#back").css("width", "70px");
 	$("#back").css("height", "70px");
 	$("#back").css("box-shadow", "yellow 0px 0px 0px 4px");
 	$("#back").attr("onclick", "close_config()");
-
 	$("#config").css("height", "50vh");
-	$("#config").css("width", "50vh");
-
+	$("#config").css("width", "250px");
 	$("#rishad").css("transform", "scale(0%)");
 }
 
@@ -170,7 +159,6 @@ function close_config(){
 	$("#cir2").css("border-radius", "100px");
 	$("#cir2").css("display", "flex");
 	$("#cir2").css("font-size", "50px");
-	// $("#cir2").html("Config");
 	setTimeout(() =>{
 		$("#cir2").attr("onclick", "open_config()");
 	}, 500)
@@ -178,14 +166,11 @@ function close_config(){
 	$(".cir").css("height", "50px");
 	$(".cir").css("margin", "20px");
 	$(".cir").css("box-shadow", "0px 0px 0px 4px yellow");
-
 	$("#back").css("width", "0px");
 	$("#back").css("height", "0px");
 	$("#back").css("box-shadow", "none");
-
 	$("#config").css("height", "0%");
 	$("#config").css("width", "0%");
-
 	$("#rishad").css("transform", "scale(100%)");
 }
 

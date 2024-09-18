@@ -52,7 +52,34 @@ function load(){
 			$(".cir").css("border-radius", "100px");
 		}, 2000);
 	}, 2000);
+	setTimeout(displayLetter, 3000);
 }
+
+var text = "passionate in Software development";
+var index = 0;
+var count = 1;
+function displayLetter() {
+	$(".description").html(text.substr(0, index + 1) + " |");
+	index++;
+
+	if (index <= text.length) {
+		setTimeout(displayLetter, 50);
+	}
+	else {
+		const animate = (count) => {
+		if (count === 5) $('.description').css("color", "white");
+		if (count > 4) return;
+		$('.description').html(text + ' |');
+		setTimeout(() => {
+			$('.description').html(text);
+			setTimeout(() => animate(count + 1), 500);
+		}, 500);
+		};
+		animate(1);
+	}
+}
+
+
 
 function menu_toggle(){
 	if($("#boot_bg").attr("data") === "off"){
@@ -209,11 +236,14 @@ function theme(e){
 	if ($(e).attr('data') === 'off') {
 		$(e).attr("data", "on");
 		$("#contents").css("background", "white");
+		$('.description').css("color", "white");
 		$(e).html('&#xe51c;');
+
 	}
 	else if ($(e).attr('data') === 'on') {
 		$(e).attr("data", "off");
 		$("#contents").css("background", "black");
+		$('.description').css("color", "black")
 		$(e).html('&#xe518;');
 	}
 }

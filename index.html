@@ -3,45 +3,39 @@
 <head>
     <title>Rishad P</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="icon" href="" sizes="any" type="any">
+    <meta property="og:title" content="rishad" />
+    <meta property="og:description" content="web developer">
+    <meta property="og:image" content="https://rishad-p.github.io/res/img/r.jpg" />
+    <link rel="icon" href="https://rishad-p.github.io/res/img/sign.svg" sizes="any" type="any">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body onload="load()">
 <div id="boot_bg" data="off">
-    <div id="close" onclick="menu_toggle()">
-        <i class="material-icons" style="font-size: 50px;font-weight: bold;">&#xe5cd;</i>
+    <div id="close" onclick="menu_toggle()" class="material-icons">
+        &#xe5cd;
     </div>
-    <div id="cir1" class="cir" style="
-        width: 0px;
-        height: 0px;
-    ">Home</div>
-    <div id="cir2" class="cir" style="
-        width: 0px;
-        height: 0px;
-    ">
+    <div id="cir1" class="cir">Home</div>
+    <div id="cir2" class="cir">
         <div id="config">
             <div class="material-icons" onclick="theme(this)" data="off">&#xe518</div>
             <div class="material-icons" onclick="screen(this);" data="off">&#xe5d0;</div>
         </div>
-        <div id='back' onclick='close_config()'><i class='material-icons' style='font-size: 50px;font-weight: bold;'>&#xe5e0;</i></div>
+        <div id='back' onclick='close_config()' class='material-icons'>
+            &#xe5e0;
+        </div>
         Config
     </div>
-    <div id="cir3" class="cir" style="
-        width: 0px;
-        height: 0px;
-    " onclick="window.location.href = 'iot'">iot</div>
-    <div id="cir4" class="cir" style="
-        width: 100px;
-        height: 100px;
-        animation: rotate 4000ms linear infinite;
-    ">contents</div>
+    <div id="cir3" class="cir" onclick="window.location.href = 'iot'">iot</div>
+    <div id="cir4" class="cir">contents</div>
     <text id="rishad">rishad</text>
 </div>
 
 <div id="bg">
     <div class="dp">
+        <p class="description"></p>
+        <p></p>
     </div>
 </div>
 <div id="contents">

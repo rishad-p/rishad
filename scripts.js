@@ -243,7 +243,7 @@ function theme(e){
 	else if ($(e).attr('data') === 'on') {
 		$(e).attr("data", "off");
 		$("#contents").css("background", "black");
-		$('.description').css("color", "black")
+		$('.description').css("color", "black");
 		$(e).html('&#xe518;');
 	}
 }

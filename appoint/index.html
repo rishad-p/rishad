@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Current Month Calendar</title>
+    <link rel="icon" href="../sign.svg" sizes="any" type="any">
+    <link rel="stylesheet" href="index.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+</head>
+<body>
+
+<div id="alert-bg" onclick="close_pop()"></div>
+
+<div id="alert-box">
+    <div id="close-pop-btn" class="material-icons" onclick="close_pop()">&#xe5cd;</div>
+    <div style="padding: 8px;">
+        <p id="pop-title"></p>
+
+        <br/>
+
+        <div class="mdc-select mdc-select--filled">
+        <div class="mdc-select__anchor">
+          <span class="mdc-select__ripple"></span>
+          <span id="demo-label" class="mdc-floating-label">Select type</span>
+          <span class="mdc-select__selected-text-container">
+            <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+          </span>
+          <span class="mdc-select__dropdown-icon">
+            <svg
+              class="mdc-select__dropdown-icon-graphic"
+              viewBox="7 10 10 5" focusable="false">
+              <polygon
+                class="mdc-select__dropdown-icon-inactive"
+                stroke="none"
+                fill-rule="evenodd"
+                points="7 10 12 15 17 10">
+              </polygon>
+              <polygon
+                class="mdc-select__dropdown-icon-active"
+                stroke="none"
+                fill-rule="evenodd"
+                points="7 15 12 10 17 15">
+              </polygon>
+            </svg>
+          </span>
+          <span class="mdc-line-ripple"></span>
+        </div>
+
+        <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+          <ul class="mdc-deprecated-list" role="listbox" aria-label="Food picker listbox">
+            <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
+              <span class="mdc-deprecated-list-item__ripple"></span>
+            </li>
+            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="Amazon delivery - Vythiri-root (B-TEAM)" role="option">
+              <span class="mdc-deprecated-list-item__ripple"></span>
+              <span class="mdc-deprecated-list-item__text">
+                Amzn Vythiri
+              </span>
+            </li>
+            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="Amazon delivery - Muttil-root (GOBA)" role="option">
+              <span class="mdc-deprecated-list-item__ripple"></span>
+              <span class="mdc-deprecated-list-item__text">
+                Amzn Muttil
+              </span>
+            </li>
+            <li class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" aria-selected="false" aria-disabled="true" role="option">
+              <span class="mdc-deprecated-list-item__ripple"></span>
+              <span class="mdc-deprecated-list-item__text">
+                other
+              </span>
+            </li>
+          </ul>
+        </div>
+        </div>
+        <br/>
+        <p id="pop-details"></p>
+        <label class="mdc-text-field mdc-text-field--filled">
+          <span class="mdc-text-field__ripple"></span>
+          <span class="mdc-floating-label">enter secret code</span>
+          <input class="mdc-text-field__input" name="code" id="code" type="text">
+          <span class="mdc-line-ripple"></span>
+        </label>
+        <div class="pop-submit-area">
+            <button id="pop-close-btn" class="mdc-button mdc-button--outlined" onclick="close_pop()">close
+                <span class="mdc-button__ripple"></span>
+            </button>
+            <text>&nbsp;</text>
+            <button id="quer-btn" class="mdc-button mdc-button--outlined" disabled onclick="quer()">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="mdc-button__ripple"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<h1 id="monthName"></h1>
+<div id="calendar" class="calendar"></div>
+<script src="index.js"></script>
+</body>
+</html>

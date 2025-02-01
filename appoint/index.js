@@ -10,13 +10,13 @@ const currentMonth = today.getMonth();
 const currentDate = today.getDate();
 const database = firebase.database();
 state = false;
+ffill = false;
+sfill = false;
 // Set the month name
 const monthNames = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
-monthNameDiv.textContent = `${monthNames[currentMonth]} ${currentYear}`;
-monthNameDiv2.textContent = `${monthNames[currentMonth+1]} ${currentYear}`;
 
 function load(){
     setTimeout(()=>{
@@ -26,6 +26,8 @@ function load(){
 
 // Generate calendar
 function generateCalendar(year, month) {
+    $("#calendar").empty();
+    monthNameDiv.textContent = `${monthNames[currentMonth]} ${currentYear}`;
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -69,6 +71,11 @@ function generateCalendar(year, month) {
             $(dayDiv).css("cursor", "auto");
             $(dayDiv).attr("class", "day current");
             $(dayDiv).attr("data", date.toDateString());
+        } else if(ffill === "filled") {
+            $(dayDiv).attr("onclick", "");
+            $(dayDiv).css("cursor", "auto");
+            $(dayDiv).attr("class", "day");
+            $(dayDiv).attr("data", date.toDateString());
         } else {
             $(dayDiv).attr("onclick", "open_pop('"+date.toDateString()+"')");
             $(dayDiv).css("cursor", "pointer");
@@ -82,6 +89,8 @@ function generateCalendar(year, month) {
 
 // Generate calendar
 function generateCalendar2(year, month) {
+    $("#calendar2").empty();
+    monthNameDiv2.textContent = `${monthNames[currentMonth+1]} ${currentYear}`;
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -105,7 +114,7 @@ function generateCalendar2(year, month) {
     // Fill in the days of the current month
     for (let day = 1; day <= daysInMonth; day++) {
         const dayDiv = document.createElement('div');
-        dayDiv.className = 'day' + (day === currentDate ? ' current' : '');
+        dayDiv.className = 'day';
         dayDiv.textContent = day;
 
         // Calculate if the current day is a Sunday
@@ -115,7 +124,12 @@ function generateCalendar2(year, month) {
         }
 
         calendarDiv2.appendChild(dayDiv);
-        if(currentDate > 20) {
+        if(sfill === "filled") {
+            $(dayDiv).attr("onclick", "");
+            $(dayDiv).css("cursor", "auto");
+            $(dayDiv).attr("class", "day");
+            $(dayDiv).attr("data", date.toDateString());
+        } else if(currentDate > 20) {
             $(dayDiv).attr("onclick", "open_pop('"+date.toDateString()+"')");
             $(dayDiv).css("cursor", "pointer");
             $(dayDiv).attr("class", "day mdc-ripple-surface");
@@ -137,49 +151,60 @@ function readData() {
             const key = childSnapshot.key; // Get the key of the data
             $('#calendar').children().each(function(index, childElement) {
                 if (data.date === $(childElement).attr("data")) {
+                    if (data.date.split(" ")[2] > currentDate) {
+                        $(childElement).css("cursor", "pointer");
+                    }
                     if (data.state === "quered") {
+                        $(childElement).attr("onclick", "");
                         if (data.type === "amzndlryvyt") {
-                            $(childElement).attr("onclick", "")
-                                .css("background", "#00800080");
+                            $(childElement).css("background", "#00800080");
                         } else if (data.type === "amzndlrymtl") {
-                            $(childElement).attr("onclick", "")
-                                .css("background", "#0000ff80");
+                            $(childElement).css("background", "#0000ff80");
                         }
                     } else if(data.state === "approved") {
+                        if (data.date.split(" ")[2] > currentDate) {
+                            $(childElement).attr("onclick", "rm_slot_pop('" + key + "', '" + data.date + "')");
+                        }
                         if (data.type === "amzndlryvyt") {
-                            $(childElement).attr("onclick", "")
-                                .css("background", "green");
+                            $(childElement).css("background", "green");
                         } else if (data.type === "amzndlrymtl") {
-                            $(childElement).attr("onclick", "")
-                                .css("background", "blue");
+                            $(childElement).css("background", "blue");
                         }
                     } else if(data.state === "remove_rqd") {
-                        $(childElement).attr("onclick", "")
-                            .css("background", "");
+                        if (data.date.split(" ")[2] > currentDate) {
+                            $(childElement).attr("onclick", "cancel_rm_slot_pop('" + key + "', '" + data.date + "')");
+                        }
+                        if (data.type === "amzndlryvyt") {
+                            $(childElement).css("background", "#00800080");
+                        } else if (data.type === "amzndlrymtl") {
+                            $(childElement).css("background", "#0000ff80");
+                        }
                     }
                 }
             });
             $('#calendar2').children().each(function(index, childElement) {
                 if (data.date === $(childElement).attr("data")) {
                     if (data.state === "quered") {
+                        $(childElement).attr("onclick", "");
                         if (data.type === "amzndlryvyt") {
-                            $(childElement).attr("onclick", "")
-                                .css("background", "#00800080");
+                            $(childElement).css("background", "#00800080");
                         } else if (data.type === "amzndlrymtl") {
-                            $(childElement).attr("onclick", "")
-                                .css("background", "#0000ff80");
+                            $(childElement).css("background", "#0000ff80");
                         }
                     } else if(data.state === "approved") {
+                        $(childElement).attr("onclick", "rm_slot_pop('" + key + "', '" + data.date + "')");
                         if (data.type === "amzndlryvyt") {
-                            $(childElement).attr("onclick", "")
-                                .css("background", "green");
+                            $(childElement).css("background", "green");
                         } else if (data.type === "amzndlrymtl") {
-                            $(childElement).attr("onclick", "")
-                                .css("background", "blue");
+                            $(childElement).css("background", "blue");
                         }
                     } else if(data.state === "remove_rqd") {
-                        $(childElement).attr("onclick", "")
-                            .css("background", "");
+                        $(childElement).attr("onclick", "cancel_rm_slot_pop('" + key + "', '" + data.date + "')")
+                        if (data.type === "amzndlryvyt") {
+                            $(childElement).css("background", "#00800080");
+                        } else if (data.type === "amzndlrymtl") {
+                            $(childElement).css("background", "#0000ff80");
+                        }
                     }
                 }
             });
@@ -190,7 +215,6 @@ function readData() {
             // $('html,body').animate({scrollTop: $(".day.current").offset().top - 100},'slow');
         }
     });
-
 }
 
 function open_pop(day){
@@ -227,9 +251,78 @@ function open_pop(day){
             progress_end();
         },10);
     }).fail(function(err) {
-        // console.log(err);
         updateConnectionStatus();
     });
+}
+
+function rm_slot_pop(key, day){
+    $("#pop-body").empty();
+    $("#pop-body").html(
+        "<label class='mdc-text-field mdc-text-field--filled'>" +
+            "<span class='mdc-text-field__ripple'></span>" +
+            "<span class='mdc-floating-label'>Enter secret code</span>" +
+            "<input class='mdc-text-field__input' name='code' id='code' type='text'>" +
+            "<span class='mdc-line-ripple'></span>" +
+        "</label>" +
+        "<div class='mdc-text-field-helper-line'>" +
+            "<div class='mdc-text-field-helper-text' id='code-helper' aria-hidden='true' style='color: red;'></div>" +
+        "</div>"+
+        "<div class='pop-submit-area'>"+
+            "<button id='pop-close-btn' class='mdc-button mdc-button--outlined' onclick='close_pop()'>close"+
+                "<span class='mdc-button__ripple'></span>"+
+            "</button>"+
+            "<text>&nbsp;</text>"+
+            "<button id='quer-btn' class='mdc-button mdc-button--outlined' onclick='rm_slot(`"+key+"`)'>"+
+                "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+                "<span class='mdc-button__ripple'></span>"+
+            "</button>"+
+        "</div>"
+    );
+    $("#alert-bg").css("display", "block");
+    $("#alert-box").css("display", "block");
+    $("#quer-btn").css("opacity", "100%");
+    setTimeout(()=>{
+        $("#alert-box").css("opacity", "100%");
+        $("#alert-box").css("transform", "scale(1)");
+        $("#pop-title").html("Remove slot on " + day);
+        $("#pop-title").attr("data", day);
+        mdc_and_rippls();
+    },10);
+}
+
+function cancel_rm_slot_pop(key, day){
+    $("#pop-body").empty();
+    $("#pop-body").html(
+        "<label class='mdc-text-field mdc-text-field--filled'>" +
+            "<span class='mdc-text-field__ripple'></span>" +
+            "<span class='mdc-floating-label'>Enter secret code</span>" +
+            "<input class='mdc-text-field__input' name='code' id='code' type='text'>" +
+            "<span class='mdc-line-ripple'></span>" +
+        "</label>" +
+        "<div class='mdc-text-field-helper-line'>" +
+            "<div class='mdc-text-field-helper-text' id='code-helper' aria-hidden='true' style='color: red;'></div>" +
+        "</div>"+
+        "<div class='pop-submit-area'>"+
+            "<button id='pop-close-btn' class='mdc-button mdc-button--outlined' onclick='close_pop()'>close"+
+                "<span class='mdc-button__ripple'></span>"+
+            "</button>"+
+            "<text>&nbsp;</text>"+
+            "<button id='quer-btn' class='mdc-button mdc-button--outlined' onclick='cancel_rm_slot(`"+key+"`)'>"+
+                "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
+                "<span class='mdc-button__ripple'></span>"+
+            "</button>"+
+        "</div>"
+    );
+    $("#alert-bg").css("display", "block");
+    $("#alert-box").css("display", "block");
+    $("#quer-btn").css("opacity", "100%");
+    setTimeout(()=>{
+        $("#alert-box").css("opacity", "100%");
+        $("#alert-box").css("transform", "scale(1)");
+        $("#pop-title").html("Undo removal request on " + day);
+        $("#pop-title").attr("data", day);
+        mdc_and_rippls();
+    },10);
 }
 
 function close_pop(){
@@ -256,8 +349,6 @@ function quer(){
             state: 'approved',
             timestamp: Date.now()
         }).then((row)=>{
-            console.log(val, $("#code").val(), date);
-            console.log(row.key);
             close_pop();
         }).catch((error)=>{
             console.log(error);
@@ -269,23 +360,135 @@ function quer(){
         $("#code-helper").html("invalid code / wrong code");
         $("#code-helper").css("opacity", "1");
     }
+    filled_slots();
 }
 
-list_quered_slots();
+function rm_slot(key){
+    database.ref('slots').child(key).once('value', row => {
+        val = row.val().type
+    });
+    if (val === "amzndlrymtl" && $("#code").val() === "klzb" || val === "amzndlryvyt" && $("#code").val() === "btm") {
+        $("#code").css("box-shadow", "green 0px 0px 0px 2px");
+        $("#code").css("color", "green");
+        $("#code").css("border-radius", "15px");
+        $("#code-helper").html("");
+        $("#code-helper").css("opacity", "1");
+        database.ref('slots').child(key).update({
+            state: "remove_rqd"
+        }).then((row)=>{
+            close_pop();
+        }).catch((error)=>{
+            console.log(error);
+        });
+    } else {
+        $("#code").css("box-shadow", "red 0px 0px 0px 2px");
+        $("#code").css("color", "red");
+        $("#code").css("border-radius", "15px");
+        $("#code-helper").html("invalid code / wrong code");
+        $("#code-helper").css("opacity", "1");
+    }
+    filled_slots();
+}
+
+function cancel_rm_slot(key){
+    database.ref('slots').child(key).once('value', row => {
+        val = row.val().type
+    });
+    if (val === "amzndlrymtl" && $("#code").val() === "klzb" || val === "amzndlryvyt" && $("#code").val() === "btm") {
+        $("#code").css("box-shadow", "green 0px 0px 0px 2px");
+        $("#code").css("color", "green");
+        $("#code").css("border-radius", "15px");
+        $("#code-helper").html("");
+        $("#code-helper").css("opacity", "1");
+        database.ref('slots').child(key).update({
+            state: "approved"
+        }).then((row)=>{
+            close_pop();
+        }).catch((error)=>{
+            console.log(error);
+        });
+    } else {
+        $("#code").css("box-shadow", "red 0px 0px 0px 2px");
+        $("#code").css("color", "red");
+        $("#code").css("border-radius", "15px");
+        $("#code-helper").html("invalid code / wrong code");
+        $("#code-helper").css("opacity", "1");
+    }
+    filled_slots();
+}
+
+filled_slots();
+function filled_slots(){
+    fappdcount = 0;
+    frmrqdcount = 0;
+    sappdcount = 0;
+    srmrqdcount = 0;
+    database.ref('slots').orderByChild('state').equalTo('approved').on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot){
+            date = new Date(childSnapshot.val().date);
+            mnt = date.toLocaleString('en-US', { month: 'short' });
+            year = date.getFullYear();
+            if(`${mnt} ${year}` === `${monthNames[currentMonth].slice(0, 3)} ${currentYear}`){
+                fappdcount = fappdcount + 1;
+            }
+        });
+    });
+    database.ref('slots').orderByChild('state').equalTo('remove_rqd').on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot){
+            date = new Date(childSnapshot.val().date);
+            mnt = date.toLocaleString('en-US', { month: 'short' });
+            year = date.getFullYear();
+            if(`${mnt} ${year}` === `${monthNames[currentMonth].slice(0, 3)} ${currentYear}`){
+                frmrqdcount = frmrqdcount + 1;
+            }
+        });
+        $("#fcount").html(fappdcount+frmrqdcount + " / 14 filled");
+        if(fappdcount+frmrqdcount >= 14){ 
+            ffill = "filled"; generateCalendar(currentYear, currentMonth);
+        } else { ffill = "blank"; generateCalendar(currentYear, currentMonth); }
+    });
+    
+    database.ref('slots').orderByChild('state').equalTo('approved').on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot){
+            date = new Date(childSnapshot.val().date);
+            mnt = date.toLocaleString('en-US', { month: 'short' });
+            year = date.getFullYear();
+            if(`${mnt} ${year}` === `${monthNames[currentMonth+1].slice(0, 3)} ${currentYear}`){
+                sappdcount = sappdcount + 1;
+            }
+        });
+    });
+    database.ref('slots').orderByChild('state').equalTo('remove_rqd').on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot){
+            date = new Date(childSnapshot.val().date);
+            mnt = date.toLocaleString('en-US', { month: 'short' });
+            year = date.getFullYear();
+            if(`${mnt} ${year}` === `${monthNames[currentMonth+1].slice(0, 3)} ${currentYear}`){
+                srmrqdcount = srmrqdcount + 1;
+            }
+        });
+        if(currentDate > 14){
+            if(sappdcount+srmrqdcount >= 7){
+                sfill = "filled"; generateCalendar2(currentYear, currentMonth + 1); 
+            } else { sfill = "blank"; generateCalendar2(currentYear, currentMonth + 1); }
+            $("#scount").html(sappdcount+srmrqdcount + " / 7 filled");
+        }
+    });
+}
+
+// list_quered_slots();
 function list_quered_slots(){
-    database.ref('slots').on('value', function(snapshot) {
+    database.ref('slots').orderByChild('state').equalTo('quered').on('value', function(snapshot) {
         $("#quered-slots").empty();
         snapshot.forEach(function(childSnapshot) {
             const data = childSnapshot.val();
             const key = childSnapshot.key; // Get the key of the data
-            if(data.state === "quered"){
-                $("#quered-slots").append(
-                    "<div>" + 
-                        data.date + "," + data.type +
-                    "</div>"
-                );
-            }
-        })
+            $("#quered-slots").append(
+                "<div>" + 
+                    data.date + "," + data.type +
+                "</div>"
+            );
+        });
     });
 }
 
@@ -362,6 +565,7 @@ function updateConnectionStatus() {
                     .css("transform", "scale(1) translate(0%, 0%)")
                     .attr("onclick", "updateConnectionStatus()");
                 console.log('no internet: connected without internet');
+                updateConnectionStatus();
             }
         }, 1000);
     } else {

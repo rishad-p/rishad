@@ -21,8 +21,44 @@ function list_quered_slots(){
     });
 }
 
-list_quered_slots();
-
-function approve_slot(){
-
+function list_revoval_requests(){
+    database.ref('slots').on('value', function(snapshot) {
+        $("#removal-requests").empty();
+        snapshot.forEach(function(childSnapshot) {
+            const data = childSnapshot.val();
+            const key = childSnapshot.key; // Get the key of the data
+            if(data.state === "remove_rqd"){
+            	const item = $('<div>').text(data.date + "," + data.type + ", " + data.state);
+				const btn = $('<button>remove</button>');
+				btn.on('click', function(e) {
+					database.ref('slots').child(key).update({
+						state: "removed"
+					});
+				});
+				item.append(btn);
+				$('#removal-requests').append(item);
+            }
+        })
+    });
 }
+
+function list_all(){
+    database.ref('slots').on('value', function(snapshot) {
+        $("#all-datas").empty();
+        snapshot.forEach(function(childSnapshot) {
+            const data = childSnapshot.val();
+            const key = childSnapshot.key;
+        	const item = $('<div>').text(data.date + ", " + data.type + ", " + data.state);
+			const dltbtn = $('<button>del</button>');
+			dltbtn.on('click', function(e) {
+				database.ref('slots').child(key).remove();
+			});
+			item.append(dltbtn);
+			$('#all-datas').append(item);
+        })
+    });
+}
+
+list_quered_slots();
+list_revoval_requests();
+list_all();

@@ -31,13 +31,13 @@
             <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value="" role="option">
               <span class="mdc-deprecated-list-item__ripple"></span>
             </li>
-            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="amzndlryvyt" role="option">
+            <li id="amzndlryvyt" class="mdc-deprecated-list-item" aria-selected="false" data-value="amzndlryvyt" role="option">
               <span class="mdc-deprecated-list-item__ripple"></span>
               <span class="mdc-deprecated-list-item__text">
                 Amzn Vythiri
               </span>
             </li>
-            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="amzndlrymtl" role="option">
+            <li id="amzndlrymtl" class="mdc-deprecated-list-item" aria-selected="false" data-value="amzndlrymtl" role="option">
               <span class="mdc-deprecated-list-item__ripple"></span>
               <span class="mdc-deprecated-list-item__text">
                 Amzn Muttil

@@ -12,6 +12,8 @@ const database = firebase.database();
 state = false;
 ffill = false;
 sfill = false;
+sffill = false;
+ssfill = false;
 // Set the month name
 const monthNames = [
     "January", "February", "March", "April", "May", "June",
@@ -219,11 +221,18 @@ function readData() {
 
 function open_pop(day){
     progress_start();
+    filled_slots();
     $.ajax("add-slot").then(function(resp) {
         $("#pop-body").empty();
         $("#pop-body").append(resp);
         $("#alert-bg").css("display", "block");
         $("#alert-box").css("display", "block");
+        if(sffill === "filled"){
+            $("#amzndlryvyt").attr("class", "mdc-deprecated-list-item mdc-deprecated-list-item--disabled");
+        }
+        if(ssfill === "filled"){
+            $("#amzndlrymtl").attr("class", "mdc-deprecated-list-item mdc-deprecated-list-item--disabled");
+        }
         // Initialize MDC Select
         const select = new mdc.select.MDCSelect(document.querySelector('.mdc-select'));
         // Example: Log selected value
@@ -423,6 +432,8 @@ function filled_slots(){
     frmrqdcount = 0;
     sappdcount = 0;
     srmrqdcount = 0;
+    vytcnt = 0;
+    mtlcnt = 0;
     database.ref('slots').orderByChild('state').equalTo('approved').on('value', function(snapshot) {
         snapshot.forEach(function(childSnapshot){
             date = new Date(childSnapshot.val().date);
@@ -455,6 +466,8 @@ function filled_slots(){
             year = date.getFullYear();
             if(`${mnt} ${year}` === `${monthNames[currentMonth+1].slice(0, 3)} ${currentYear}`){
                 sappdcount = sappdcount + 1;
+                if(childSnapshot.val().type === "amzndlryvyt") { vytcnt = vytcnt+1; }
+                if(childSnapshot.val().type === "amzndlrymtl") { mtlcnt = mtlcnt+1; }
             }
         });
     });
@@ -465,13 +478,33 @@ function filled_slots(){
             year = date.getFullYear();
             if(`${mnt} ${year}` === `${monthNames[currentMonth+1].slice(0, 3)} ${currentYear}`){
                 srmrqdcount = srmrqdcount + 1;
+                if(childSnapshot.val().type === "amzndlryvyt") { vytcnt = vytcnt+1; }
+                if(childSnapshot.val().type === "amzndlrymtl") { mtlcnt = mtlcnt+1; }
             }
         });
         if(currentDate > 14){
-            if(sappdcount+srmrqdcount >= 7){
-                sfill = "filled"; generateCalendar2(currentYear, currentMonth + 1); 
-            } else { sfill = "blank"; generateCalendar2(currentYear, currentMonth + 1); }
-            $("#scount").html(sappdcount+srmrqdcount + " / 7 filled");
+            if(sappdcount+srmrqdcount >= 14){
+                sfill = "filled";
+                generateCalendar2(currentYear, currentMonth + 1); 
+            } else {
+                sfill = "blank";
+                generateCalendar2(currentYear, currentMonth + 1);
+            }
+            if(currentDate > 19 && currentDate < 25){
+                if(vytcnt >= 7){
+                    sffill = "filled";
+                } else {
+                    sffill = "blank";
+                }
+                if(mtlcnt >= 7){
+                    ssfill = "filled";
+                } else {
+                    ssfill = "blank";
+                }
+            }
+            $("#vytcnt").html(vytcnt + " / 7 Vythiry");
+            $("#mtlcnt").html(mtlcnt + " / 7 Muttil");
+            $("#scount").html("total : " + (Number(sappdcount) + Number(srmrqdcount)) + " / 14 filled");
         }
     });
 }

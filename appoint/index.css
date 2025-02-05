@@ -6,7 +6,7 @@ body{
     overflow-X:hidden;
     font-family:sans-serif;
     display: grid;
-    text-align: center;
+    place-items: center;
 
     background: #1a1a1a;
     color: lightgray;
@@ -138,6 +138,11 @@ body{
 
 h6{
     margin: auto;
+}
+
+td{
+    padding-left: 16px;
+    text-align: left;
 }
 
 .callme{

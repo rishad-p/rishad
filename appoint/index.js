@@ -221,6 +221,7 @@ function readData() {
 
 function open_pop(day){
     progress_start();
+    updateConnectionStatus();
     filled_slots();
     $.ajax("add-slot").then(function(resp) {
         $("#pop-body").empty();
@@ -344,6 +345,7 @@ function close_pop(){
 }
 
 function quer(){
+    updateConnectionStatus();
     val = new mdc.select.MDCSelect(document.querySelector('.mdc-select')).value;
     date = $("#pop-title").attr("data");
     if (val === "amzndlrymtl" && $("#code").val() === "klzb" || val === "amzndlryvyt" && $("#code").val() === "btm") {
@@ -563,14 +565,29 @@ function mdc_and_rippls(){
 function updateConnectionStatus() {
     if (navigator.onLine) {
         state = "pent";
+        // $.ajax('https://worldtimeapi.org/api/timezone/Asia/Kolkata').then(function (resp) {
+        //         let dateTime = resp.datetime;
+        //         let date = dateTime.split("T")[0];
+        //         let time = dateTime.split("T")[1].split("+")[0];
+        //         console.log(date, time);
+        // }).fail(function(err){
+        //     console.log("req failed");
+        // });
         $.ajax({
-            url: 'https://rishad-p.github.io/fetch.txt',
+            url: 'https://worldtimeapi.org/api/timezone/Asia/Kolkata',
             cache: false, 
             method: 'GET',
             success: function (data) {
                 state = "req";
+
+                let dateTime = data.datetime;
+                let date = dateTime.split("T")[0];
+                let time = dateTime.split("T")[1].split("+")[0];
+                console.log(date, time);
+
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function (err) {
+                console.log(JSON.stringify(err));
                 state = "failed";
             }
         });
@@ -587,6 +604,7 @@ function updateConnectionStatus() {
                         .css("text-shadow", "none")
                         .css("transform", "scale(0.5) translate(-50%, -150%)")
                         .attr("onclick", "");
+                        progress_end();
                 }, 500);
             } else {
                 $('#connection')
@@ -598,7 +616,7 @@ function updateConnectionStatus() {
                     .css("transform", "scale(1) translate(0%, 0%)")
                     .attr("onclick", "updateConnectionStatus()");
                 console.log('no internet: connected without internet');
-                updateConnectionStatus();
+                // updateConnectionStatus();
             }
         }, 1000);
     } else {
@@ -610,6 +628,7 @@ function updateConnectionStatus() {
             .css("text-shadow", "0px 0px 10px #00000080")
             .css("transform", "scale(1) translate(0%, 0%)")
             .attr("onclick", "");
+            progress_end();
     }
 }
 

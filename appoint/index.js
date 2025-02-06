@@ -14,6 +14,7 @@ ffill = false;
 sfill = false;
 sffill = false;
 ssfill = false;
+time = false;
 // Set the month name
 const monthNames = [
     "January", "February", "March", "April", "May", "June",
@@ -24,6 +25,7 @@ function load(){
     setTimeout(()=>{
         $('html,body').animate({scrollTop: $(".day.current").offset().top - 100},'slow');
     }, 1500);
+    check_localtime();
 }
 
 // Generate calendar
@@ -181,6 +183,8 @@ function readData() {
                         } else if (data.type === "amzndlrymtl") {
                             $(childElement).css("background", "#0000ff80");
                         }
+                    } else {
+                        $(childElement).attr("onclick", "");
                     }
                 }
             });
@@ -207,6 +211,9 @@ function readData() {
                         } else if (data.type === "amzndlrymtl") {
                             $(childElement).css("background", "#0000ff80");
                         }
+                    }
+                    else {
+                        $(childElement).attr("onclick", "");
                     }
                 }
             });
@@ -565,26 +572,12 @@ function mdc_and_rippls(){
 function updateConnectionStatus() {
     if (navigator.onLine) {
         state = "pent";
-        // $.ajax('https://worldtimeapi.org/api/timezone/Asia/Kolkata').then(function (resp) {
-        //         let dateTime = resp.datetime;
-        //         let date = dateTime.split("T")[0];
-        //         let time = dateTime.split("T")[1].split("+")[0];
-        //         console.log(date, time);
-        // }).fail(function(err){
-        //     console.log("req failed");
-        // });
         $.ajax({
-            url: 'https://worldtimeapi.org/api/timezone/Asia/Kolkata',
+            url: 'https://rishad-p.github.io/fetch.txt',
             cache: false, 
             method: 'GET',
             success: function (data) {
                 state = "req";
-
-                let dateTime = data.datetime;
-                let date = dateTime.split("T")[0];
-                let time = dateTime.split("T")[1].split("+")[0];
-                console.log(date, time);
-
             },
             error: function (err) {
                 console.log(JSON.stringify(err));
@@ -632,15 +625,58 @@ function updateConnectionStatus() {
     }
 }
 
+function check_localtime(){
+    $.ajax("https://www.timeapi.io/api/Time/current/zone?timeZone=Asia/Kolkata").then(function(resp){
+        if( 
+            resp.year !== new Date().getFullYear() || 
+            resp.month !== new Date().getMonth() + 1 || 
+            resp.day !== new Date().getDate() || 
+            resp.hour !== new Date().getHours() 
+        ){
+            time = "inncorrect";
+            $('#connection')
+                .html('&#xe857;')
+                .css('color', 'orange')
+                .css("font-size", "100px")
+                .css("border-radius", "0px")
+                .css("text-shadow", "0px 0px 10px #00000080")
+                .css("transform", "scale(1) translate(0%, 0%)")
+                .attr("onclick", "");
+        } else {
+            if (time === "inncorrect") { location.reload(); }
+            time = "ok";
+            $('#connection')
+                .html('&#xe858;')
+                .css('color', 'green');
+            setTimeout(()=>{
+                $("#connection")
+                    .css("color", "transparent")
+                    .css("font-size", "1000px")
+                    .css("border-radius", "500px")
+                    .css("text-shadow", "none")
+                    .css("transform", "scale(0.5) translate(-50%, -150%)")
+                    .attr("onclick", "");
+                    progress_end();
+            }, 500);
+        }
+    }).fail(function(err){
+        console.log(JSON.stringify(err));
+    });
+}
+
+document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+        check_localtime();
+    } else {
+        check_localtime();
+    }
+});
+
 window.addEventListener('online', updateConnectionStatus);
 window.addEventListener('offline', updateConnectionStatus);
-
+window.addEventListener("focus", check_localtime() );
+window.addEventListener("blur", check_localtime() );
 updateConnectionStatus();
-// setInterval(()=>{
-//     updateConnectionStatus();
-// },5000);
-
-
 mdc_and_rippls();
 generateCalendar(currentYear, currentMonth);
 if(currentDate > 14){

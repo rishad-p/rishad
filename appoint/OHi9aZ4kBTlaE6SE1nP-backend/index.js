@@ -59,6 +59,24 @@ function list_all(){
     });
 }
 
+function visitors(){
+    database.ref('visitors').on('value', function(snapshot) {
+        $("#visitors").empty();
+        snapshot.forEach(function(childSnapshot) {
+            const data = childSnapshot.val();
+            const key = childSnapshot.key;
+        	const item = $('<div>').text(data.date + ", " + data.type + ", " + data.state);
+			const dltbtn = $('<button>del</button>');
+			dltbtn.on('click', function(e) {
+				database.ref('visitors').child(key).remove();
+			});
+			item.append(dltbtn);
+			$('#visitors').append(item);
+        })
+    });
+}
+
 list_quered_slots();
 list_revoval_requests();
 list_all();
+visitors();

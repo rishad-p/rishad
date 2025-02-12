@@ -9,17 +9,17 @@
 <body>
 <script type="text/javascript">
 log = document.getElementById("log");
+const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 console.log("User Agent:", navigator.userAgent);
 console.log("Platform:", navigator.platform);
 console.log("Language:", navigator.language);
+console.log(isMobile ? "Mobile" : "Desktop");
 console.log("Referrer:", document.referrer);
 console.log("Curr URL:", window.location.href);
-const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-console.log(isMobile ? "Mobile" : "Desktop");
 
 console.log("\n\n\n");
 
-console.log("Timezone:", Intl.DateTimeFormat().resolvedOptions().timeZone);
+console.log();
 const now = new Date();
 console.log("Local Time:", now.toLocaleString());
 console.log("Seconds:", now.getSeconds());
@@ -32,6 +32,7 @@ msg = `
 city            :${data.city}
 country_capital :${data.country_capital}
 country_name    :${data.country_name}
+Timezone        :${Intl.DateTimeFormat().resolvedOptions().timeZone}
 ip              :${data.ip}
 ip v            :${data.version}
 nsp             :${data.org}

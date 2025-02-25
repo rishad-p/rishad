@@ -185,6 +185,7 @@ function readData() {
                         }
                     } else {
                         $(childElement).attr("onclick", "");
+                        $(childElement).css("background", "yellow");
                     }
                 }
             });
@@ -214,6 +215,7 @@ function readData() {
                     }
                     else {
                         $(childElement).attr("onclick", "");
+                        $(childElement).css("background", "yellow");
                     }
                 }
             });

@@ -8,8 +8,8 @@ body{
     display: grid;
     place-items: center;
 
-    background: #1a1a1a;
-    color: lightgray;
+    /* background: #1a1a1a; */
+    /* color: lightgray; */
 }
 .month-name{
     font-weight: 100;
@@ -80,7 +80,7 @@ body{
     height: 100vh;
     display: none;
     transition: 300ms;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
 }
 
 #alert-box{

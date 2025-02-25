@@ -1,0 +1,38 @@
+body{
+	font-family: sans-serif;
+}
+
+#visitors{
+	font-family: monospace;
+	width: 100%;
+}
+
+/*.dt{
+	width: 33.33%;
+	white-space: nowrap;
+    overflow: auto;
+    min-width: 33%;
+    max-width: 33%;
+}*/
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  td {
+/*    max-width: 200px;*/
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .dt {
+/*    max-width: 25vw;*/
+    overflow-x: auto;
+    white-space: nowrap;
+    display: block;
+  }

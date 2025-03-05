@@ -139,7 +139,6 @@ function generateCalendar2(year, month) {
             $(dayDiv).attr("class", "day mdc-ripple-surface");
             $(dayDiv).attr("data", date.toDateString());
         }
-
     }
     readData();
     mdc_and_rippls();
@@ -160,32 +159,22 @@ function readData() {
                     }
                     if (data.state === "quered") {
                         $(childElement).attr("onclick", "");
-                        if (data.type === "amzndlryvyt") {
-                            $(childElement).css("background", "#00800080");
-                        } else if (data.type === "amzndlrymtl") {
-                            $(childElement).css("background", "#0000ff80");
-                        }
+                        $(childElement).css("background", "#0000ff80");
                     } else if(data.state === "approved") {
                         if (data.date.split(" ")[2] > currentDate) {
-                            $(childElement).attr("onclick", "rm_slot_pop('" + key + "', '" + data.date + "')");
+                            $(childElement).attr("onclick", "rm_slot_pop('" + key + "', '" + JSON.stringify(data) + "')");
                         }
-                        if (data.type === "amzndlryvyt") {
-                            $(childElement).css("background", "green");
-                        } else if (data.type === "amzndlrymtl") {
-                            $(childElement).css("background", "blue");
-                        }
+                        $(childElement).css("background", "blue");
                     } else if(data.state === "remove_rqd") {
                         if (data.date.split(" ")[2] > currentDate) {
                             $(childElement).attr("onclick", "cancel_rm_slot_pop('" + key + "', '" + data.date + "')");
                         }
-                        if (data.type === "amzndlryvyt") {
-                            $(childElement).css("background", "#00800080");
-                        } else if (data.type === "amzndlrymtl") {
-                            $(childElement).css("background", "#0000ff80");
-                        }
+                        $(childElement).css("background", "#0000ff80");
                     } else {
-                        $(childElement).attr("onclick", "");
-                        $(childElement).css("background", "yellow");
+                        $(childElement)
+                            .attr("onclick", "")
+                            .css("background", "yellow")
+                            .css("color", "red");
                     }
                 }
             });
@@ -193,29 +182,19 @@ function readData() {
                 if (data.date === $(childElement).attr("data")) {
                     if (data.state === "quered") {
                         $(childElement).attr("onclick", "");
-                        if (data.type === "amzndlryvyt") {
-                            $(childElement).css("background", "#00800080");
-                        } else if (data.type === "amzndlrymtl") {
-                            $(childElement).css("background", "#0000ff80");
-                        }
+                        $(childElement).css("background", "#0000ff80");
                     } else if(data.state === "approved") {
                         $(childElement).attr("onclick", "rm_slot_pop('" + key + "', '" + data.date + "')");
-                        if (data.type === "amzndlryvyt") {
-                            $(childElement).css("background", "green");
-                        } else if (data.type === "amzndlrymtl") {
-                            $(childElement).css("background", "blue");
-                        }
+                        $(childElement).css("background", "blue");
                     } else if(data.state === "remove_rqd") {
-                        $(childElement).attr("onclick", "cancel_rm_slot_pop('" + key + "', '" + data.date + "')")
-                        if (data.type === "amzndlryvyt") {
-                            $(childElement).css("background", "#00800080");
-                        } else if (data.type === "amzndlrymtl") {
-                            $(childElement).css("background", "#0000ff80");
-                        }
+                        $(childElement).attr("onclick", "cancel_rm_slot_pop('" + key + "', '" + data.date + "')");
+                        $(childElement).css("background", "#0000ff80");
                     }
                     else {
-                        $(childElement).attr("onclick", "");
-                        $(childElement).css("background", "yellow");
+                        $(childElement)
+                            .attr("onclick", "")
+                            .css("background", "yellow")
+                            .css("color", "red");
                     }
                 }
             });
@@ -223,7 +202,6 @@ function readData() {
         if(state === "req"){
             progress_end();
             $(".calendar").css("opacity", "100%");
-            // $('html,body').animate({scrollTop: $(".day.current").offset().top - 100},'slow');
         }
     });
 }
@@ -252,11 +230,7 @@ function open_pop(day){
                 $("#quer-btn").attr("disabled", "disabled");
                 $("#quer-btn").css("opacity", "25%");
             } else if (select.value !== null || select.value !== "") {
-                if (select.value === "amzndlrymtl") {
-                    $("#pop-details").html("Amazon delivery - Muttil-root (GOBA)");
-                } else if(select.value === "amzndlryvyt") {
-                    $("#pop-details").html("Amazon delivery - Vythiri-root (B-TEAM)");
-                }
+                $("#pop-details").html("#"+select.value);
                 $("#quer-btn").removeAttr("disabled");
                 $("#quer-btn").css("opacity", "100%");
             }  
@@ -274,9 +248,10 @@ function open_pop(day){
     });
 }
 
-function rm_slot_pop(key, day){
+function rm_slot_pop(key, data){
     $("#pop-body").empty();
     $("#pop-body").html(
+        "<p id='pop-details'></p>" +
         "<label class='mdc-text-field mdc-text-field--filled'>" +
             "<span class='mdc-text-field__ripple'></span>" +
             "<span class='mdc-floating-label'>Enter secret code</span>" +
@@ -303,8 +278,8 @@ function rm_slot_pop(key, day){
     setTimeout(()=>{
         $("#alert-box").css("opacity", "100%");
         $("#alert-box").css("transform", "scale(1)");
-        $("#pop-title").html("Remove slot on " + day);
-        $("#pop-title").attr("data", day);
+        $("#pop-title").html("#" + JSON.parse(data).type);
+        $("#pop-details").html("Remove slot on " + JSON.parse(data).date+" .?");
         mdc_and_rippls();
     },10);
 }
@@ -357,7 +332,20 @@ function quer(){
     updateConnectionStatus();
     val = new mdc.select.MDCSelect(document.querySelector('.mdc-select')).value;
     date = $("#pop-title").attr("data");
-    if (val === "amzndlrymtl" && $("#code").val() === "klzb" || val === "amzndlryvyt" && $("#code").val() === "btm") {
+    if ( 
+        [
+            "amzndlryvyt", 
+            "amzndlrykpt", 
+            "amzndlrycdl"
+        ].includes(val) && $("#code").val() === "btm" && $("#code").val() != "klzb" 
+        || 
+        [
+            "amzndlrympd",
+            "amzndlrymtl",
+            "amzndlrykbk",
+            "amzndlrymnd"
+        ].includes(val) && $("#code").val() === "klzb" && $("#code").val() != "btm"
+    ) {
         $("#code").css("box-shadow", "green 0px 0px 0px 2px");
         $("#code").css("color", "green");
         $("#code").css("border-radius", "15px");
@@ -387,7 +375,20 @@ function rm_slot(key){
     database.ref('slots').child(key).once('value', row => {
         val = row.val().type
     });
-    if (val === "amzndlrymtl" && $("#code").val() === "klzb" || val === "amzndlryvyt" && $("#code").val() === "btm") {
+    if ( 
+        [
+            "amzndlryvyt", 
+            "amzndlrykpt", 
+            "amzndlrycdl"
+        ].includes(val) && $("#code").val() === "btm" && $("#code").val() != "klzb" 
+        || 
+        [
+            "amzndlrympd",
+            "amzndlrymtl",
+            "amzndlrykbk",
+            "amzndlrymnd"
+        ].includes(val) && $("#code").val() === "klzb" && $("#code").val() != "btm"
+    ) {
         $("#code").css("box-shadow", "green 0px 0px 0px 2px");
         $("#code").css("color", "green");
         $("#code").css("border-radius", "15px");
@@ -414,7 +415,20 @@ function cancel_rm_slot(key){
     database.ref('slots').child(key).once('value', row => {
         val = row.val().type
     });
-    if (val === "amzndlrymtl" && $("#code").val() === "klzb" || val === "amzndlryvyt" && $("#code").val() === "btm") {
+    if ( 
+        [
+            "amzndlryvyt", 
+            "amzndlrykpt", 
+            "amzndlrycdl"
+        ].includes(val) && $("#code").val() === "btm" && $("#code").val() != "klzb" 
+        || 
+        [
+            "amzndlrympd",
+            "amzndlrymtl",
+            "amzndlrykbk",
+            "amzndlrymnd"
+        ].includes(val) && $("#code").val() === "klzb" && $("#code").val() != "btm"
+    ) {
         $("#code").css("box-shadow", "green 0px 0px 0px 2px");
         $("#code").css("color", "green");
         $("#code").css("border-radius", "15px");
@@ -611,7 +625,6 @@ function updateConnectionStatus() {
                     .css("transform", "scale(1) translate(0%, 0%)")
                     .attr("onclick", "updateConnectionStatus()");
                 console.log('no internet: connected without internet');
-                // updateConnectionStatus();
             }
         }, 1000);
     } else {

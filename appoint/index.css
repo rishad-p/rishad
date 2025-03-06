@@ -110,6 +110,10 @@ body{
     top: 8px;
     font-size: 35px;
     color: red;
+    background-color: white;
+    box-shadow: #000000 0px 0px 0px 1px;
+    margin-top: -20px;
+    margin-right: -20px;
     cursor: pointer;
     border-radius: 10px;
 }

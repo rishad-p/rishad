@@ -108,14 +108,21 @@ body{
     position: absolute;
     right: 8px;
     top: 8px;
-    font-size: 35px;
-    color: red;
-    background-color: white;
+    background: white;
     box-shadow: #000000 0px 0px 0px 1px;
-    margin-top: -20px;
-    margin-right: -20px;
+    /* margin-top: -20px; */
+    /* margin-right: -20px; */
     cursor: pointer;
     border-radius: 10px;
+}
+
+#close-pop-btn:hover{
+    background: gray;
+}
+
+.close-pop-icon{
+    color: red;
+    font-size: 35px;
 }
 
 #pop-title{

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IOT-Remote</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body onload="load()">
+<div id="load"></div>
+<div id="bg_mask"></div>
+<br><br><br>
+<div class="platestart" id="scr">
+    <div id="flash" class="plate off" data="off" onclick="clic(this, 'flash');">
+        <div class="draw-mov"></div>
+        <div class="iplate">
+            <i class="material-icons">&#xe90f;</i>
+            <div class="txt">flash</div>
+        </div>
+    </div>
+    <div id="flash_int" class="plate off" data="off" onclick="clic(this, 'flash_int');">
+        <div class="draw-mov"></div>
+        <div class="iplate">
+            <i class="material-icons">&#xe25f;</i>
+            <div class="txt">blink</div>
+        </div>
+    </div>
+    <div id="vibrate" class="plate off" data="off" onclick="clic(this, 'vibrate');">
+        <div class="draw-mov"></div>
+        <div class="iplate">
+            <i class="material-icons">&#xe62d;</i>
+            <div class="txt">vibrat</div>
+        </div>
+    </div>
+    <div id="vibrate_int" class="plate off" data="off" onclick="clic(this, 'vibrate_int');">
+        <div class="draw-mov"></div>
+        <div class="iplate">
+            <i class="material-icons">&#xe62d;</i>
+            <div class="txt">int</div>
+        </div>
+    </div>
+    <div id="music" class="plate off" data="off" onclick="clic(this, 'music');">
+        <div class="draw-mov"></div>
+        <div class="iplate">
+            <i class="material-icons">&#xe405;</i>
+            <div class="txt">music</div>
+        </div>
+    </div>
+    <div class="plate off" data="off" onclick="clic(this);">
+        <div class="draw-mov"></div>
+        <div class="iplate">
+            <i class="material-icons">&#xe3c6;</i>
+            <div class="txt">square</div>
+        </div>
+    </div>
+    <div class="plate off" data="off" onclick="clic(this);">
+        <div class="draw-mov"></div>
+        <div class="iplate">
+            <i class="material-icons">&#xe41a;</i>
+            <div class="txt">rotate</div>
+        </div>
+    </div>
+    <div class="plate off" data="off" style="visibility:hidden;">
+    </div>
+</div>
+<iframe src="" id="flash_iframe" style="visibility: hidden;"></iframe>
+<audio id="song"><source src="../s.mp3" type="audio/mp3"> </audio>
+<script src="../firebase-config.js"></script>
+<script src="scripts.js"></script>
+</body>
+</html>

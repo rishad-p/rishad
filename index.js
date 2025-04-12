@@ -98,6 +98,7 @@ function menu_toggle(){
 		$(".cir").css("margin", "20px");
 		$("#cir1").attr("onclick", "navigate_menu('bg')");
 		$("#cir2").attr("onclick", "open_config()");
+		$("#cir3").attr("onclick", "navigate_menu('info')");
 		$("#cir4").attr("onclick", "navigate_menu('contents')");
 		$("#rishad").css("transform", "scale(100%)");
 		setTimeout(() =>{

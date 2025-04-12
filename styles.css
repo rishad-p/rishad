@@ -111,6 +111,16 @@ body{
     align-items: center;
     flex-direction: column;
 }
+.info-chaild-a{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    font-weight: 100;
+    font-family: Roboto;
+}
 .dp{
     width: 100vw;
     height: 100vh;

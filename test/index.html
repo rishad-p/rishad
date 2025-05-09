@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GSAP Scroll Effects</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #121212;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .spacer {
+      height: 100vh;
+    }
+
+    section.effect {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      perspective: 1000px;
+    }
+
+    .content {
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.8);
+    }
+
+    h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #aaa;
+    }
+
+    .flip-section .content {
+      transform-style: preserve-3d;
+    }
+
+    .clip-section .content {
+      clip-path: inset(0 0 100% 0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="spacer"></div>
+
+  <!-- 1. Fade -->
+  <section class="effect fade-section">
+    <div class="content">
+      <h2>Fade Effect</h2>
+      <p>This section fades in and out.</p>
+    </div>
+  </section>
+
+  <!-- 2. Scale -->
+  <section class="effect scale-section">
+    <div class="content">
+      <h2>Scale Effect</h2>
+      <p>This section zooms in and out.</p>
+    </div>
+  </section>
+
+  <!-- 3. Slide -->
+  <section class="effect slide-section">
+    <div class="content">
+      <h2>Slide Effect</h2>
+      <p>This section slides up and out.</p>
+    </div>
+  </section>
+
+  <!-- 4. Rotate -->
+  <section class="effect rotate-section">
+    <div class="content">
+      <h2>Rotate Effect</h2>
+      <p>This section rotates while fading.</p>
+    </div>
+  </section>
+
+  <!-- 5. Blur -->
+  <section class="effect blur-section">
+    <div class="content">
+      <h2>Blur Effect</h2>
+      <p>This section fades with blur.</p>
+    </div>
+  </section>
+
+  <!-- 6. Skew -->
+  <section class="effect skew-section">
+    <div class="content">
+      <h2>Skew Effect</h2>
+      <p>This section skews during scroll.</p>
+    </div>
+  </section>
+
+  <!-- 7. Flip -->
+  <section class="effect flip-section">
+    <div class="content">
+      <h2>Flip Effect</h2>
+      <p>This section flips in and out in 3D.</p>
+    </div>
+  </section>
+
+  <!-- 8. Clip Path Text Reveal -->
+  <section class="effect clip-section">
+    <div class="content">
+      <h2>Clip Path Reveal</h2>
+      <p>Text is revealed using clip path.</p>
+    </div>
+  </section>
+
+  <!-- 9. Background Color Change -->
+  <section class="effect bg-section" style="background: #121212;">
+    <div class="content">
+      <h2>Background Change</h2>
+      <p>The background color changes smoothly.</p>
+    </div>
+  </section>
+
+  <!-- 10. Letter Spacing -->
+  <section class="effect letter-section">
+    <div class="content">
+      <h2>Letter Spacing</h2>
+      <p>This section animates text spacing.</p>
+    </div>
+  </section>
+
+  <div class="spacer"></div>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    function animateSection(selector, animations) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: selector,
+          start: "top top",
+          end: "+=200%",
+          scrub: true,
+          pin: true
+        }
+      });
+      animations(tl, selector + " .content");
+    }
+
+    // 1. Fade
+    animateSection(".fade-section", (tl, target) => {
+      tl.to(target, { opacity: 1 })
+        .to(target, { opacity: 0 });
+    });
+
+    // 2. Scale
+    animateSection(".scale-section", (tl, target) => {
+      tl.to(target, { opacity: 1, scale: 1 })
+        .to(target, { opacity: 0, scale: 0.8 });
+    });
+
+    // 3. Slide
+    animateSection(".slide-section", (tl, target) => {
+      tl.fromTo(target, { y: 100, opacity: 0 }, { y: 0, opacity: 1 })
+        .to(target, { y: -100, opacity: 0 });
+    });
+
+    // 4. Rotate
+    animateSection(".rotate-section", (tl, target) => {
+      tl.fromTo(target, { rotation: -45, opacity: 0 }, { rotation: 0, opacity: 1 })
+        .to(target, { rotation: 45, opacity: 0 });
+    });
+
+    // 5. Blur
+    animateSection(".blur-section", (tl, target) => {
+      tl.fromTo(target, { filter: "blur(20px)", opacity: 0 }, { filter: "blur(0px)", opacity: 1 })
+        .to(target, { filter: "blur(20px)", opacity: 0 });
+    });
+
+    // 6. Skew
+    animateSection(".skew-section", (tl, target) => {
+      tl.fromTo(target, { skewX: 20, opacity: 0 }, { skewX: 0, opacity: 1 })
+        .to(target, { skewX: -20, opacity: 0 });
+    });
+
+    // 7. Flip
+    animateSection(".flip-section", (tl, target) => {
+      tl.fromTo(target, { rotationY: -90, opacity: 0 }, { rotationY: 0, opacity: 1 })
+        .to(target, { rotationY: 90, opacity: 0 });
+    });
+
+    // 8. Clip Path
+    animateSection(".clip-section", (tl, target) => {
+      tl.to(target, { clipPath: "inset(0 0 0% 0)", opacity: 1 })
+        .to(target, { clipPath: "inset(0 0 100% 0)", opacity: 0 });
+    });
+
+    // 9. Background Color
+    animateSection(".bg-section", (tl, target) => {
+      tl.to(".bg-section", { backgroundColor: "#333", duration: 1 })
+        .to(".bg-section", { backgroundColor: "#121212", duration: 1 });
+    });
+
+    // 10. Letter Spacing
+    animateSection(".letter-section", (tl, target) => {
+      tl.fromTo(target, { letterSpacing: "1rem", opacity: 0 }, { letterSpacing: "0.1rem", opacity: 1 })
+        .to(target, { letterSpacing: "2rem", opacity: 0 });
+    });
+  </script>
+
+</body>
+</html>

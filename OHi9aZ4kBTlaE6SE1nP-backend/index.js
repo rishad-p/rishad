@@ -98,9 +98,21 @@ function visitors(){
             } else if(data.data.utc_time.split(' ').slice(0, 4).join(' ') === new Date(new Date().setDate(new Date().getDate() - 2)).toDateString()) {
             	day_bf_yesterday_count = day_bf_yesterday_count + 1;
             	$('#day_bf_yesterday_visitors').prepend(item);
+            } else if(
+            		data.data.utc_time.split(' ').slice(0, 4).join(' ') === new Date(new Date().setDate(new Date().getDate() - 3)).toDateString() ||
+            		data.data.utc_time.split(' ').slice(0, 4).join(' ') === new Date(new Date().setDate(new Date().getDate() - 4)).toDateString() ||
+            		data.data.utc_time.split(' ').slice(0, 4).join(' ') === new Date(new Date().setDate(new Date().getDate() - 5)).toDateString() ||
+            		data.data.utc_time.split(' ').slice(0, 4).join(' ') === new Date(new Date().setDate(new Date().getDate() - 6)).toDateString() ||
+            		data.data.utc_time.split(' ').slice(0, 4).join(' ') === new Date(new Date().setDate(new Date().getDate() - 7)).toDateString() ||
+            		data.data.utc_time.split(' ').slice(0, 4).join(' ') === new Date(new Date().setDate(new Date().getDate() - 8)).toDateString() ||
+            		data.data.utc_time.split(' ').slice(0, 4).join(' ') === new Date(new Date().setDate(new Date().getDate() - 9)).toDateString() 
+
+            	) {
+	            	// day_bf_yesterday_count = day_bf_yesterday_count + 1;
+	            	$('#past_visitors').prepend(item);
             } else {
             	past_count = past_count + 1;
-            	$('#past_visitors').prepend(item);
+            	
             }
     	});
     	console.log("today count           ",today_count);

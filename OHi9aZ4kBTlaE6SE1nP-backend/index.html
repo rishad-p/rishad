@@ -5,9 +5,8 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"> -->
     <title>Appoint backend</title>
     <link rel="icon" href="../sign.svg" sizes="any" type="any">
-    <!-- <link rel="stylesheet" href="index.css"/> -->
-    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     <link rel="stylesheet" type="text/css" href="index.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -25,8 +24,30 @@
 <div id="all-datas"></div>
 <br><br><br>
 
+<div id="alert-bg" onclick="close_pop()"></div>
 
+<div id="alert-box">
+    <div id="close-pop-btn" class="" onclick="close_pop()">
+        <i class="material-icons close-pop-icon">&#xe5cd;</i>
+    </div>
+    <div style="padding: 8px;">
+        <p id="pop-title"></p>
+        <br/>
+        <div id="pop-body">
+            
+        </div>
+    </div>
+</div>
 
+<h1 id="monthName" class="month-name"></h1>
+<div id="calendar" class="calendar"></div>
+<p class="num-slots" id="fcount"></p>
+<br><br>
+<h1 id="monthName2" class="month-name"></h1>
+<div id="calendar2" class="calendar"></div>
+<p class="num-slots" id="scount"></p>
+
+<br><br><br>
 <p id="today_vc">Today visitors</p>
 <table id="today_visitors" style="width:100%;"></table>
 <br><br><br>

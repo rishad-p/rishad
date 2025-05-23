@@ -3,7 +3,8 @@ function onload() {
     boot();
     $(".world>path").attr("id", "world");
     setTimeout(()=>{
-        $(".hello").css("transform", "scale(1)");
+        // gsap.set(".hello-svg-holder", { scale: 1, transformOrigin: "left center" });
+        $(".hello-svg-holder").css("width", "50%");
         $(".world").css("visibility", "visible");
         gsap.set("#world", { drawSVG: "0%" });
         gsap.to("#world", {
@@ -27,6 +28,7 @@ function onload() {
 }
 
 function boot(){
+    // gsap.set(".hello-svg-holder", { scale: 3.5, transformOrigin: "left center" });
     gsap.set("#hello", { drawSVG: "0%" });
     gsap.to("#hello", {
         duration: 3,

@@ -51,6 +51,10 @@
       color: #aaa;
     }
 
+    .fade-section .content {
+      opacity: 1; /* Initially visible */
+    }
+
     .flip-section .content {
       transform-style: preserve-3d;
     }
@@ -62,7 +66,7 @@
 </head>
 <body>
 
-  <div class="spacer"></div>
+  <!-- <div class="spacer"></div> -->
 
   <!-- 1. Fade -->
   <section class="effect fade-section">
@@ -163,9 +167,13 @@
     }
 
     // 1. Fade
+    // animateSection(".fade-section", (tl, target) => {
+    //   tl.to(target, { opacity: 1 })
+    //     .to(target, { opacity: 0 });
+    // });
+
     animateSection(".fade-section", (tl, target) => {
-      tl.to(target, { opacity: 1 })
-        .to(target, { opacity: 0 });
+      tl.to(target, { opacity: 0 });
     });
 
     // 2. Scale

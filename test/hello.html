@@ -43,7 +43,7 @@
     </style>
 </head>
 
-<body onload="load();">
+<body>
 
     <!-- “Hello” in Pacifico converted to a single path -->
     <svg xmlns="http://www.w3.org/2000/svg"
@@ -64,11 +64,6 @@ M 19.559445,162.95238 C 47.825208,178.33865 82.517764,86.20831 65.232447,90.5296
     <script src="DrawSVGPlugin.min.js"></script>
 
 <script>
-function load() {
-    setTimeout(()=>{
-        $("svg").css("transform", "scale(0.01)");
-    },2000);
-}
 gsap.set("#hello", { drawSVG: "0%" });
 gsap.to("#hello", {
     duration: 3,

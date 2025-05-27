@@ -4,7 +4,7 @@ function onload() {
     $(".world>path").attr("id", "world");
     setTimeout(()=>{
         // gsap.set(".hello-svg-holder", { scale: 1, transformOrigin: "left center" });
-        $(".hello-svg-holder").css("width", "50%");
+        $(".hello-svg-holder").css("transform", "scale(1)");
         $(".world").css("visibility", "visible");
         gsap.set("#world", { drawSVG: "0%" });
         gsap.to("#world", {
@@ -42,12 +42,16 @@ function menu_toggle(){
         $('.s1').attr('class', 'stick s1');
         $('.s2').attr('class', 'stick s2');
         $('.s3').attr('class', 'stick s3');
-        $('.menu').attr('data', 'clossed');
+        $('.menu')
+            .attr('data', 'clossed')
+            // .css("transform", "rotate(0deg)");
     }
     else if ($('.menu').attr('data') === 'clossed') {
         $('.s1').attr('class', 'stick s1 s1-open');
         $('.s2').attr('class', 'stick s2 s2-open');
         $('.s3').attr('class', 'stick s3 s3-open');
-        $('.menu').attr('data', 'opened');
+        $('.menu')
+            .attr('data', 'opened')
+            // .css("transform", "rotate(90deg)");
     }
 }

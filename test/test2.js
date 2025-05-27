@@ -159,11 +159,9 @@ function getAgeFromDOB(dob) {
   const years = Math.floor(totalDays / 365.25);
   const days = Math.floor(totalDays - years * 365.25);
 
-  return `Age: ${years}yr's<br><text style='font-size: 1.5rem;'> ${days}day's ${hr}hr's ${sec}s & ${ms.toString().padStart(2, '0')}ms</text>`;
+  return `Age: ${years}yr's<br><text style='font-size: 1.5rem;'> ${days}day's ${hr}hr's ${sec}s & ${ms.toString().padStart(3, '0')}ms</text>`;
 }
 
-// Example usage:
-console.log(getAgeFromDOB("1997-12-25T14:30:00"));
 setInterval(()=>{
     $("#age").html(getAgeFromDOB("1997-05-10T14:30:00"));
 },50);

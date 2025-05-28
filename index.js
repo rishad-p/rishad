@@ -55,7 +55,7 @@ function load(){
 	setTimeout(displayLetter, 3000);
 }
 
-var text = "Passionate & full-scack developer";
+var text = "Passionate & full-stack developer";
 var index = 0;
 var count = 1;
 function displayLetter() {

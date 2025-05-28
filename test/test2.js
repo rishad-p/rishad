@@ -163,7 +163,6 @@ function getAgeFromDOB(dob) {
 }
 
 // Example usage:
-console.log(getAgeFromDOB("1997-12-25T14:30:00"));
 setInterval(()=>{
     $("#age").html(getAgeFromDOB("1997-05-10T14:30:00"));
 },50);

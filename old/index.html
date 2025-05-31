@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rishad P</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta property="og:title" content="rishad" />
+    <meta property="og:description" content="web developer">
+    <meta property="og:image" content="https://rishad-p.github.io/res/img/r.jpg" />
+    <link rel="icon" href="https://rishad-p.github.io/res/img/sign.svg" sizes="any" type="any">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/visitor.js"></script>
+</head>
+<body onload="load()">
+<div id="boot_bg" data="off">
+    <div id="close" onclick="menu_toggle()" class="material-icons">
+        &#xe5cd;
+    </div>
+    <div id="cir1" class="cir">Home</div>
+    <div id="cir2" class="cir">
+        <div id="config">
+            <div class="material-icons" onclick="theme(this)" data="off">&#xe518</div>
+            <div class="material-icons" onclick="screen(this);" data="off">&#xe5d0;</div>
+        </div>
+        <div id='back' onclick='close_config()' class='material-icons'>
+            &#xe5e0;
+        </div>
+        Config
+    </div>
+    <div id="cir3" class="cir">info</div>
+    <div id="cir4" class="cir">contents</div>
+    <text id="rishad">rishad</text>
+</div>
+
+<div id="bg">
+    <div class="dp">
+        <p class="description"></p>
+        <p></p>
+    </div>
+</div>
+<div id="info">
+    <div class="info-chaild-a">
+        <text style="padding: 34px;">
+            Provides complete software related solutions and products in cheapest price you ever seen,<br><br>
+            backend software, web apps, ect. 
+        </text>
+    </div>
+    <h1 style="padding: 0px 34px;font-weight: 100;">See also. </h1>
+    <text style="padding: 0px 34px 34px 34px;display: block;">
+        <a target="_blank" href="https://firmtechdev.github.io/">firmtech (our startup)</a><br>
+        <br>
+        <a target="_blank" href="https://rishad-p.github.io/">My GitHub page</a><br>
+    </text>
+</div>
+<div id="contents">
+    <a href="../iot">iot_project</a>
+    <a href="https://github.com/rishad-p">GitHub</a>
+</div>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>

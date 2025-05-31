@@ -1,250 +1,265 @@
-start();
-function start(){
-	boot_animate();
-	boot = setInterval(() =>{ boot_animate(); }, 2000);
 
-	if ( DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function" ) {
-		DeviceMotionEvent.requestPermission();
-	}
-	window.addEventListener("devicemotion", function(e){
-		val = Math.trunc(e.accelerationIncludingGravity.y);
-		$("#bg").css("background-position", "0% "+ val +"0%");
-	});
+function onload() {
+    boot();
+    $(".world>path").attr("id", "world");
+    setTimeout(()=>{
+        $(".hello").css("transform", "scale(1)");
+        $(".world").css("visibility", "visible");
+        gsap.set("#world", { drawSVG: "0%" });
+        gsap.to("#world", {
+            duration: 3,
+            drawSVG: "100%",
+            ease: "power1.inOut"
+        });
+        setTimeout(()=>{
+            scroll();
+            hover();
+            if ( DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function" ) {
+                DeviceMotionEvent.requestPermission();
+            }
+            window.addEventListener("devicemotion", function(e){
+                val = Math.trunc(e.accelerationIncludingGravity.y);
+                $("#menu-page").css("background-position", "0% "+ val +"0%");
+            });
+        },3000);
+    },2000);
+    setTimeout(()=>{
+        $(".stick")
+            .css("width", "44px")
+            .css("height", "6px");
+        setTimeout(()=>{
+            $(".stick")
+                .css("transition", "300ms")
+                .css("transform-origin", "center center")
+                .css("margin-left", "auto")
+                .css("margin-right", "auto");
+        },1500);
+    },4000);
 }
 
-function boot_animate(){
-	setTimeout(() =>{
-		$("#cir4").css("border-radius", "100% 00% 00% 00%");
-		setTimeout(() =>{
-			$("#cir4").css("border-radius", "00% 100% 00% 00%");
-			setTimeout(() =>{
-				$("#cir4").css("border-radius", "00% 00% 100% 00%");
-				setTimeout(() =>{
-					$("#cir4").css("border-radius", "00% 00% 00% 100%");
-				}, 500);
-			}, 500);
-		}, 500);
-	}, 500);
+function boot(){
+    gsap.set("#hello", { drawSVG: "0%" });
+    gsap.to("#hello", {
+        duration: 3,
+        drawSVG: "100%",
+        ease: "power1.inOut"
+    });
 }
-
-function load(){
-	setTimeout(() =>{
-        $("#boot_bg").css("top","10vh");
-        $("#boot_bg").css("right","10vh");
-        $("#boot_bg").css("border-radius", "20px");
-		// $("#boot_bg").css("backdrop-filter", "blur(10px)");
-		$("#boot_bg").attr("onclick", "menu_toggle()");
-		setTimeout(() =>{
-			clearInterval(boot);
-			$(".cir").css("animation", "none");
-			$(".cir").css("border-radius", "100px");
-			$("#cir1").css("width", "60px");
-			$("#cir1").css("height", "10px");
-			$("#cir4").css("width", "60px");
-			$("#cir4").css("height", "10px");
-			$("#boot_bg").css("background", "#ffffff40");
-			$("#boot_bg").css("width", "70px");
-			$("#boot_bg").css("height", "70px");
-			$("#boot_bg").css("top", "10px");
-			$("#boot_bg").css("right", "10px");
-		}, 300);
-		setTimeout(() =>{
-			$(".cir").css("border-radius", "100px");
-		}, 2000);
-	}, 2000);
-	setTimeout(displayLetter, 3000);
-}
-
-var text = "Passionate & full-stack developer";
-var index = 0;
-var count = 1;
-function displayLetter() {
-	$(".description").html(text.substr(0, index + 1) + " |");
-	index++;
-
-	if (index <= text.length) {
-		setTimeout(displayLetter, 50);
-	}
-	else {
-		const animate = (count) => {
-		if (count === 5) $('.description').css("color", "white");
-		if (count > 4) return;
-		$('.description').html(text + ' |');
-		setTimeout(() => {
-			$('.description').html(text);
-			setTimeout(() => animate(count + 1), 500);
-		}, 500);
-		};
-		animate(1);
-	}
-}
-
-
 
 function menu_toggle(){
-	if($("#boot_bg").attr("data") === "off"){
-		$("body").css("overflow-y", "hidden");
-		$("#boot_bg").attr("onclick", " ");
-		$("#boot_bg").attr("data", "on");
-		$("#boot_bg").css("width", "100vw");
-		$("#boot_bg").css("height", "100vh");
-		$("#boot_bg").css("top", "10vh");
-		$("#boot_bg").css("right", "10vh");
-		$("#close").css("width", "70px");
-		$("#close").css("height", "70px");
-		$("#close").css("box-shadow", "0px 0px 0px 4px yellow");
-		$(".cir").css("width", "250px");
-		$(".cir").css("height", "50px");
-		$(".cir").css("margin", "20px");
-		$("#cir1").attr("onclick", "navigate_menu('bg')");
-		$("#cir2").attr("onclick", "open_config()");
-		$("#cir3").attr("onclick", "navigate_menu('info')");
-		$("#cir4").attr("onclick", "navigate_menu('contents')");
-		$("#rishad").css("transform", "scale(100%)");
-		setTimeout(() =>{
-			$("#boot_bg").css("border-radius", "0px");
-			$("#boot_bg").css("top", "0px");
-			$("#boot_bg").css("right", "0px");
-			$("#boot_bg").css("background", "#00000047");
-			$(".cir").css("background", "transparent");
-			$(".cir").css("box-shadow", "0px 0px 0px 4px yellow");
-
-		}, 300);
-	}
-	else if($("#boot_bg").attr("data") === "on"){
-		$("body").css("overflow-y", "auto");
-		$("#boot_bg").attr("data", "off");
-		$("#boot_bg").css("top", "10vh");
-		$("#boot_bg").css("right", "10vh");
-		$("#cir2").css("border-radius", "100px");
-		$("#cir2").css("display", "flex");
-		$("#cir2").css("font-size", "50px");
-		$("#back").css("width", "0px");
-		$("#back").css("height", "0px");
-		$("#back").css("box-shadow", "none");
-		$("#config").css("height", "0%");
-		$("#config").css("width", "0%");
-		$("#rishad").css("transform", "scale(0%)");
-		setTimeout(() =>{
-			$("#boot_bg").attr("onclick", "menu_toggle()");
-			$("#boot_bg").css("width", "70px");
-			$("#boot_bg").css("height", "70px");
-			$("#boot_bg").css("border-radius", "20px");
-			$("#boot_bg").css("top", "10px");
-			$("#boot_bg").css("right", "10px");
-			$("#boot_bg").css("background", "#ffffff40");
-			$("#close").css("width", "0px");
-			$("#close").css("height", "0px");
-			$("#close").css("box-shadow", "none");
-			$("#cir1").css("width", "60px");
-			$("#cir1").css("height", "10px");
-			$("#cir2").css("width", "0px");
-			$("#cir2").css("height", "0px");
-			$("#cir3").css("width", "0px");
-			$("#cir3").css("height", "0px");
-			$("#cir4").css("width", "60px");
-			$("#cir4").css("height", "10px");
-			$(".cir").css("margin", "3px");
-			$(".cir").css("background", "yellow");
-			$(".cir").css("box-shadow", "none");
-			$("#cir1").attr("onclick", " ");
-			$("#cir2").attr("onclick", " ");
-			$("#cir4").attr("onclick", " ");
-		}, 300);
-	}
+    if ($('.menu').attr('data') === 'opened') {
+        $('.s1').attr('class', 'stick s1');
+        $('.s2').attr('class', 'stick s2');
+        $('.s3').attr('class', 'stick s3');
+        $('.menu').attr('data', 'clossed');
+        const items = $("#menu-page h1").toArray();
+        items.forEach((element, index) => {
+            setTimeout(() => {
+                $(element).css({
+                    clip: "rect(40px,00px,40px,0px)"
+                });
+            }, index * 100);
+        });
+        $("#menu-page").css({
+            top: "10vh",
+            right: "10vw",
+            borderRadius: "50px",
+            boxShadow: "0px 0px 0px 5px white",
+        });
+        setTimeout(()=>{
+            // $("#menu-page").attr("class", "menu-page-closed");
+            $("#menu-page").css({
+                top: "-100vh",
+                right: "-100vw",
+                borderRadius: "50px",
+                boxShadow: "0px 0px 0px 3px white",
+            });
+        },500);
+    }
+    else if ($('.menu').attr('data') === 'clossed') {
+        $('.s1').attr('class', 'stick s1 s1-open');
+        $('.s2').attr('class', 'stick s2 s2-open');
+        $('.s3').attr('class', 'stick s3 s3-open');
+        $('.menu').attr('data', 'opened');
+        // $("#menu-page").attr("class", "menu-page-opened");
+        $("#menu-page").css({
+            top: "10vh",
+            right: "10vw",
+            borderRadius: "50px",
+            boxShadow: "0px 0px 0px 3px white",
+        });
+        setTimeout(()=>{
+            const items = $("#menu-page h1").toArray();
+            items.reverse().forEach((element, index) => {
+                setTimeout(() => {
+                    $(element).css({
+                        clip: "rect(0px,100px,40px,0px)"
+                    });
+                }, index * 100);
+            });
+            $("#menu-page").css({
+                top: "0vh",
+                right: "0vw",
+                borderRadius: "0px",
+                boxShadow: "0px 0px 0px 0px white",
+            });
+        },500);
+    }
 }
 
-function navigate_menu(value){
-    $('html,body').animate({scrollTop: $("#"+value).offset().top},'slow');
-    menu_toggle();
+function hover(){
+    var bgm = document.getElementById("bgm");
+    for (let i = 1; i <= 4; i++) {
+        $(`.i${i}`).hover(
+            function () {
+                $(`.il${i}`).css({
+                    width: "100px",
+                    marginLeft: "0px"
+                });
+                bgm.play();
+            },
+            function () {
+                $(`.il${i}`).css({
+                    width: "0px",
+                    marginLeft: "100px"
+                });
+                setTimeout(() => {
+                    $(`.il${i}`).css({
+                        marginLeft: "0px"
+                    });
+                }, 400);
+            }
+        );
+    }
 }
 
-function open_config(){
-	$("#cir2").css("height", "50vh");
-	$("#cir2").css("width", "250px");
-	$("#cir2").css("border-radius", "0px 50px 50px 50px");
-	$("#cir2").css("display", "unset");
-	$("#cir2").css("font-size", "0px");
-	$("#cir2").attr("onclick", "");
-	$(".cir").css("margin", "0px");
-	$("#cir1").css("width", "0px");
-	$("#cir1").css("height", "0px");
-	$("#cir1").css("box-shadow", "none");
-	$("#cir3").css("width", "0px");
-	$("#cir3").css("height", "0px");
-	$("#cir3").css("box-shadow", "none");
-	$("#cir4").css("width", "0px");
-	$("#cir4").css("height", "0px");
-	$("#cir4").css("box-shadow", "none");
-	$("#back").css("width", "70px");
-	$("#back").css("height", "70px");
-	$("#back").css("box-shadow", "yellow 0px 0px 0px 4px");
-	$("#back").attr("onclick", "close_config()");
-	$("#config").css("height", "50vh");
-	$("#config").css("width", "250px");
-	$("#rishad").css("transform", "scale(0%)");
+function mouse(e){
+    let x = e.clientX;
+    let y = e.clientY;
+    $("#point").attr("style", `margin-top: ${y}px !important; margin-left: ${x}px !important;`);
 }
 
-function close_config(){
-	$("#cir2").css("border-radius", "100px");
-	$("#cir2").css("display", "flex");
-	$("#cir2").css("font-size", "50px");
-	setTimeout(() =>{
-		$("#cir2").attr("onclick", "open_config()");
-	}, 500)
-	$(".cir").css("width", "250px");
-	$(".cir").css("height", "50px");
-	$(".cir").css("margin", "20px");
-	$(".cir").css("box-shadow", "0px 0px 0px 4px yellow");
-	$("#back").css("width", "0px");
-	$("#back").css("height", "0px");
-	$("#back").css("box-shadow", "none");
-	$("#config").css("height", "0%");
-	$("#config").css("width", "0%");
-	$("#rishad").css("transform", "scale(100%)");
+// let lastScroll = 0;
+
+// $(window).on("scroll", function() {
+//     let currentScroll = $(this).scrollTop();
+//     if (currentScroll > lastScroll) {
+//         $(".menu").css({ top: -74+"px", right: -74+"px" });
+//     } else {
+//         $(".menu").css({ top: 10+"px", right: 10+"px" });
+//     }
+//     lastScroll = currentScroll;
+// });
+
+function scroll(){
+    gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#section-a",
+            start: "top top",
+            end: "+=200%",
+            scrub: true,
+            pin: true
+        }
+    });
+
+    // Add animations to the timeline — reverse draw both
+    tl.to("#hello", { drawSVG: "0%", ease: "none" }, 0)
+    .to("#world", { drawSVG: "0%", ease: "none" }, 0);
+
+    gsap.registerPlugin(ScrollTrigger);
+    animateSection(".scale-section", (tl, target) => {
+      tl.to(target, { opacity: 1, scale: 1 })
+        .to(target, {}, "+=0.5") 
+        .to(target, { opacity: 0, scale: 20, duration: 5 })
+    });
+
+    animateSection(".fade-section", (tl, target) => {
+      tl.to(target, { opacity: 1 })
+        .to(target, {}, "+=0.5") // hold
+        .to(target, { opacity: 0 });
+    });
+
+    animateSection(".slide-section", (tl, target) => {
+      tl.fromTo(target, { y: 100, opacity: 0 }, { y: 0, opacity: 1 })
+        .to(target, {}, "+=0.5")
+        .to(target, { y: -100, opacity: 0 });
+    });
+
+    animateSection(".rotate-section", (tl, target) => {
+      tl.fromTo(target, { rotation: -45, opacity: 0 }, { rotation: 0, opacity: 1 })
+        .to(target, {}, "+=0.5")
+        .to(target, { rotation: 45, opacity: 0 });
+    });
+
+    animateSection(".blur-section", (tl, target) => {
+      tl.fromTo(target, { filter: "blur(20px)", opacity: 0 }, { filter: "blur(0px)", opacity: 1 })
+        .to(target, {}, "+=0.5")
+        .to(target, { filter: "blur(20px)", opacity: 0 });
+    });
+
+    animateSection(".skew-section", (tl, target) => {
+      tl.fromTo(target, { skewX: 20, opacity: 0 }, { skewX: 0, opacity: 1 })
+        .to(target, {}, "+=0.5")
+        .to(target, { skewX: -20, opacity: 0 });
+    });
+
+    animateSection(".flip-section", (tl, target) => {
+      tl.fromTo(target, { rotationY: -90, opacity: 0 }, { rotationY: 0, opacity: 1 })
+        .to(target, {}, "+=0.5")
+        .to(target, { rotationY: 90, opacity: 0 });
+    });
+
 }
 
-function screen(e){
-	if ($(e).attr('data') === 'off') {
-		$(e).attr("data", "on");
-		$(e).html('&#xe5d1;');
-	    if (document.documentElement.requestFullscreen) {
-	      document.documentElement.requestFullscreen();
-	    } else if (document.documentElement.msRequestFullscreen) {
-	      document.documentElement.msRequestFullscreen();
-	    } else if (document.documentElement.mozRequestFullScreen) {
-	      document.documentElement.mozRequestFullScreen();
-	    } else if (document.documentElement.webkitRequestFullscreen) {
-	      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-	    }
-	}
-	else if ($(e).attr('data') === 'on') {
-		$(e).attr("data", "off");
-		$(e).html('&#xe5d0;');
-	    if (document.exitFullscreen) {
-	      document.exitFullscreen();
-	    } else if (document.msExitFullscreen) {
-	      document.msExitFullscreen();
-	    } else if (document.mozCancelFullScreen) {
-	      document.mozCancelFullScreen();
-	    } else if (document.webkitExitFullscreen) {
-	      document.webkitExitFullscreen();
-	    }
-	}
+
+function animateSection(selector, animations) {
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: selector,
+      start: "top top",
+      end: "+=200%",
+      scrub: true,
+      pin: true
+    }
+  });
+  animations(tl, selector + " .content");
 }
 
-function theme(e){
-	if ($(e).attr('data') === 'off') {
-		$(e).attr("data", "on");
-		$("#contents").css("background", "white");
-		$('.description').css("color", "white");
-		$(e).html('&#xe51c;');
 
-	}
-	else if ($(e).attr('data') === 'on') {
-		$(e).attr("data", "off");
-		$("#contents").css("background", "black");
-		$('.description').css("color", "black");
-		$(e).html('&#xe518;');
-	}
+function getAgeFromDOB(dob) {
+  const now = new Date();
+  const birthDate = new Date(dob);
+  const diffMs = now - birthDate;
+
+  const ms = diffMs % 1000;
+  const totalSec = Math.floor(diffMs / 1000);
+  const sec = totalSec % 60;
+  const totalMin = Math.floor(totalSec / 60);
+  const hr = totalMin % 60;
+  const totalHr = Math.floor(totalMin / 60);
+  const day = totalHr % 24;
+  const totalDays = Math.floor(totalHr / 24);
+
+  const years = Math.floor(totalDays / 365.25);
+  const days = Math.floor(totalDays - years * 365.25);
+
+  $("#age").html(`Age: ${years}yr's<br>`);
+  $("#age-sec").html(
+    `
+      <div>${days}day's ${hr}hr's</div>
+      <div style="width:45px;text-align: end;white-space: nowrap;">${sec}</div>
+      <div> s & </div>
+      <div style="width:55px;text-align: end;white-space: nowrap;">${ms.toString().padStart(3, '0')}</div>
+      <div>ms</div>
+  `
+  );
+  
+  // `<text style='font-size: 1.5rem;'> ${days}day's ${hr}hr's ${sec}s <br>& ${ms.toString().padStart(3, '0')}ms</text>`;
 }
+
+setInterval(()=>{
+    getAgeFromDOB("1997-05-10T14:30:00");
+},50);
+

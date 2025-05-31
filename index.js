@@ -67,7 +67,6 @@ function menu_toggle(){
             boxShadow: "0px 0px 0px 5px white",
         });
         setTimeout(()=>{
-            // $("#menu-page").attr("class", "menu-page-closed");
             $("#menu-page").css({
                 top: "-100vh",
                 right: "-100vw",
@@ -81,7 +80,6 @@ function menu_toggle(){
         $('.s2').attr('class', 'stick s2 s2-open');
         $('.s3').attr('class', 'stick s3 s3-open');
         $('.menu').attr('data', 'opened');
-        // $("#menu-page").attr("class", "menu-page-opened");
         $("#menu-page").css({
             top: "10vh",
             right: "10vw",
@@ -93,7 +91,7 @@ function menu_toggle(){
             items.reverse().forEach((element, index) => {
                 setTimeout(() => {
                     $(element).css({
-                        clip: "rect(0px,100px,40px,0px)"
+                        clip: "rect(0px,300px,40px,0px)"
                     });
                 }, index * 100);
             });
@@ -113,7 +111,7 @@ function hover(){
         $(`.i${i}`).hover(
             function () {
                 $(`.il${i}`).css({
-                    width: "100px",
+                    width: "200px",
                     marginLeft: "0px"
                 });
                 bgm.play();
@@ -121,7 +119,7 @@ function hover(){
             function () {
                 $(`.il${i}`).css({
                     width: "0px",
-                    marginLeft: "100px"
+                    marginLeft: "200px"
                 });
                 setTimeout(() => {
                     $(`.il${i}`).css({
@@ -136,7 +134,7 @@ function hover(){
 function mouse(e){
     let x = e.clientX;
     let y = e.clientY;
-    $("#point").attr("style", `margin-top: ${y}px !important; margin-left: ${x}px !important;`);
+    $("#point").attr("style", `margin-top: ${y-10}px !important; margin-left: ${x-10}px !important;`);
 }
 
 // let lastScroll = 0;

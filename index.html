@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
+    <title>Rishad P</title>
 	<meta charset="UTF-8" />
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	<title>test</title>
-	<link rel="icon" href="https://rishad-p.web.app/sign.svg" sizes="any" type="any">
+    <meta property="og:description" content="Passionate & Full-Stack Developer | Coder">
+    <meta property="og:image" content="https://rishad-p.github.io/res/img/r.jpg" />
+	<link rel="icon" href="res/r3.png" sizes="any" type="any">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
 	<script src="js/gsap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -34,10 +36,26 @@
         onmousemove="mouse(event);" 
     >
         <div id="point"></div>
-        <div><h1 class="i1">item 1</h1><div class="il1"></div></div>
-        <div><h1 class="i2">item 2</h1><div class="il2"></div></div>
-        <div><h1 class="i3">item 3</h1><div class="il3"></div></div>
-        <div><h1 class="i4">item 4</h1><div class="il4"></div></div>
+        <div>
+            <h1 class="i1" onclick="
+            $('html,body').animate({scrollTop: $('#section-a').offset().top},'slow');
+            setTimeout(()=>{
+                menu_toggle();
+            },500);
+            ">Top</h1>
+            <div class="il1"></div>
+        </div>
+        <div><h1 class="i2">CV | Resume</h1><div class="il2"></div></div>
+        <div><h1 class="i3">Middle</h1><div class="il3"></div></div>
+        <div>
+            <h1 class="i4" onclick="
+            $('html,body').animate({scrollTop: $('#bottom-section').offset().top},'slow');
+            setTimeout(()=>{
+                menu_toggle();
+            },500);
+            ">Bottom</h1>
+            <div class="il4"></div>
+        </div>
     </div>
 	<!-- <section style="height:100vh;"></section> -->
 	<section id="section-a">
@@ -133,7 +151,7 @@
             </div>
 		</div>
 	</section>
-	<section style="background: white;text-align: center;">
+	<section style="background: white;text-align: center;" id="bottom-section">
         <text style="width: 100%;color: gray;">
             other links
             <br>

@@ -1,7 +1,5 @@
 * {
-	/*    transition: 400ms;*/
 	margin: 0;
-/*	padding: 0 !important;*/
 	box-sizing: border-box;
 }
 
@@ -30,6 +28,10 @@ body {
 	align-items: center;
 	border-radius: 10px;
     transform: scale(0.6);
+}
+
+.menu:hover{
+	transform: scale(0.8);
 }
 
 .stick {
@@ -84,13 +86,11 @@ body {
     border-radius: 50px;
     box-shadow: 0px 0px 0px 3px white;
 
-    background-image: url(bg.svg);
+    background-image: url(res/bg.svg);
     background-size: 110%;
 }
 
 .menu-page-opened{
-/*    top: 10vh;*/
-/*    right: 10vw;*/
     border-radius: 0px;
     box-shadow: 0px 0px 0px 0px white;
 }
@@ -103,17 +103,15 @@ body {
 }
 
 #menu-page>div{
-/*    box-shadow: 0px 0px 0px 5px white;*/
     width: 300px;
     height: 50px;
     margin: 15px 0px;
-/*    display: flex;*/
 }
 
 #menu-page>div>h1{
-    width: 100px;
+/*    width: 100px;*/
     height: 40px;
-/*    white-space: nowrap;*/
+    white-space: nowrap;
 /*    overflow: hidden;*/
 /*    transition: 400ms;*/
     font-weight: 100;
